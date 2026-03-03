@@ -1,0 +1,194 @@
+---
+title: Card components
+description: Card component variations including service cards, project cards, and testimonials
+---
+
+## Base card
+
+The base card component provides a white background with shadow and hover effects.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <article class="card">
+      <div class="service-icon">🏠</div>
+      <h3>Residential Construction</h3>
+      <p>Custom homes and high-quality residential structures built for long-term value.</p>
+    </article>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(17, 24, 39, 0.12);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Cards feature a white background with 14px border radius, subtle shadow (defined in CSS variables), and 1.2rem padding. On hover, cards lift 4px upward with enhanced shadow for depth.
+
+## Service icon
+
+Service cards use icon containers with background color and rounded corners.
+
+```css
+.service-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(30, 58, 138, 0.1);
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+```
+
+Icon containers are 46x46px squares with 10px border radius, light blue background (10% opacity of primary color), centered content using CSS Grid, and 0.8rem spacing below.
+
+## Service cards example
+
+Here's how service cards are used in the services section:
+
+```html
+<div class="card-grid">
+  <article class="card">
+    <div class="service-icon">🏠</div>
+    <h3>Residential Construction</h3>
+    <p>Custom homes and high-quality residential structures built for long-term value.</p>
+  </article>
+  <article class="card">
+    <div class="service-icon">🏢</div>
+    <h3>Commercial Buildings</h3>
+    <p>Office and retail developments with efficient layouts and durable materials.</p>
+  </article>
+  <article class="card">
+    <div class="service-icon">🔨</div>
+    <h3>Renovation & Remodeling</h3>
+    <p>Upgrade existing spaces with modern finishes and practical improvements.</p>
+  </article>
+</div>
+```
+
+Service cards combine the base card styling with icon containers. They're displayed in a three-column grid (`.card-grid`) and include an emoji icon, heading, and description.
+
+## Project cards
+
+Project cards display images with project information.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <article class="card project-card project-item" data-type="residential">
+      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80" alt="Modern Villa" />
+      <h3>Modern Villa</h3>
+      <p><strong>Location:</strong> Phnom Penh</p>
+      <p><strong>Type:</strong> Residential</p>
+    </article>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(17, 24, 39, 0.12);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Project cards inherit base card styling and include a full-width image at the top, project title, location, and type information. The `data-type` attribute enables JavaScript filtering functionality.
+
+## Testimonial cards
+
+Testimonial cards feature a distinctive left border accent.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <article class="card testimonial">
+      <h3>Testimonials</h3>
+      <p>"Very professional and reliable team."</p>
+      <strong>– Mr. Dara</strong>
+    </article>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .testimonial {
+      border-left: 4px solid var(--secondary);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Testimonial cards extend base card styling with a 4px orange left border (using the secondary color) to visually distinguish customer feedback.
+
+## Check list cards
+
+Check lists display items in a vertical grid with checkmark prefixes.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <ul class="check-list">
+      <li>Experienced Engineers</li>
+      <li>On-Time Delivery</li>
+      <li>High-Quality Materials</li>
+      <li>Transparent Pricing</li>
+    </ul>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .check-list li {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .check-list li::before {
+      content: "✅ ";
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Each list item is styled as a mini card with white background, rounded corners, shadow, and semi-bold text. A checkmark emoji is automatically added before each item using CSS `::before` pseudo-element.

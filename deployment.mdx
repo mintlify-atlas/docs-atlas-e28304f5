@@ -1,0 +1,401 @@
+---
+title: Deployment
+description: Deploy the BuildPro Construction static site to production with Netlify, Vercel, GitHub Pages, or Railway
+---
+
+## Deploy to production
+
+BuildPro Construction is a static website that can be deployed to any static hosting platform. This guide covers the most popular options, all of which offer free tiers for hosting static sites.
+
+<CardGroup cols={2}>
+  <Card title="Netlify" icon="cloud">
+    Instant deploys with GitHub integration and automatic HTTPS
+  </Card>
+  <Card title="Vercel" icon="triangle">
+    Lightning-fast CDN with zero configuration
+  </Card>
+  <Card title="GitHub Pages" icon="github">
+    Free hosting directly from your GitHub repository
+  </Card>
+  <Card title="Railway" icon="train">
+    Modern platform with simple deployment workflow
+  </Card>
+</CardGroup>
+
+## Deploy to Netlify
+
+Netlify is one of the easiest platforms for deploying static sites with automatic deployments from Git.
+
+<Steps>
+  <Step title="Push your code to GitHub">
+    If you haven't already, create a GitHub repository and push your code:
+
+    ```bash
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git branch -M main
+    git remote add origin https://github.com/yourusername/buildpro-construction.git
+    git push -u origin main
+    ```
+  </Step>
+
+  <Step title="Sign up for Netlify">
+    Go to [netlify.com](https://netlify.com) and sign up with your GitHub account.
+  </Step>
+
+  <Step title="Import your repository">
+    1. Click **Add new site** → **Import an existing project**
+    2. Choose **GitHub** as your Git provider
+    3. Select your `buildpro-construction` repository
+    4. Configure build settings:
+
+    ```yaml Build settings
+    Build command: (leave empty)
+    Publish directory: .
+    ```
+
+    <Info>
+    Since this is a static site with no build process, leave the build command empty and set publish directory to `.` (current directory).
+    </Info>
+  </Step>
+
+  <Step title="Deploy">
+    Click **Deploy site**. Netlify will:
+
+    - Clone your repository
+    - Deploy your site to a global CDN
+    - Provide a URL like `https://random-name-123456.netlify.app`
+    - Enable automatic HTTPS
+
+    Your site will be live in under a minute!
+  </Step>
+
+  <Step title="Configure custom domain (optional)">
+    To use your own domain:
+
+    1. Go to **Site settings** → **Domain management**
+    2. Click **Add custom domain**
+    3. Enter your domain (e.g., `buildpro.com`)
+    4. Follow the DNS configuration instructions
+
+    <Note>
+    Netlify automatically provisions SSL certificates for custom domains.
+    </Note>
+  </Step>
+</Steps>
+
+### Continuous deployment
+
+With Netlify, every push to your `main` branch automatically triggers a new deployment:
+
+```bash
+git add .
+git commit -m "Update homepage hero text"
+git push
+```
+
+Netlify will automatically rebuild and deploy your changes.
+
+## Deploy to Vercel
+
+Vercel offers excellent performance and a streamlined deployment experience.
+
+<Steps>
+  <Step title="Push your code to GitHub">
+    Ensure your code is in a GitHub repository (see Netlify Step 1 above).
+  </Step>
+
+  <Step title="Sign up for Vercel">
+    Go to [vercel.com](https://vercel.com) and sign up with your GitHub account.
+  </Step>
+
+  <Step title="Import your repository">
+    1. Click **Add New** → **Project**
+    2. Import your `buildpro-construction` repository
+    3. Configure project settings:
+
+    ```yaml Build settings
+    Framework Preset: Other
+    Build Command: (leave empty)
+    Output Directory: .
+    ```
+
+    <Info>
+    Vercel automatically detects this as a static site. No build configuration needed.
+    </Info>
+  </Step>
+
+  <Step title="Deploy">
+    Click **Deploy**. Vercel will:
+
+    - Deploy to their global edge network
+    - Provide a URL like `https://buildpro-construction.vercel.app`
+    - Enable automatic HTTPS
+    - Set up preview deployments for pull requests
+  </Step>
+
+  <Step title="Add custom domain (optional)">
+    1. Go to **Project Settings** → **Domains**
+    2. Enter your domain name
+    3. Follow the DNS configuration instructions
+  </Step>
+</Steps>
+
+### Preview deployments
+
+Vercel automatically creates preview deployments for every pull request, making it easy to review changes before merging.
+
+## Deploy to GitHub Pages
+
+GitHub Pages is completely free and perfect for open-source projects.
+
+<Steps>
+  <Step title="Prepare your repository">
+    Ensure your code is in a GitHub repository with `index.html` in the root directory.
+  </Step>
+
+  <Step title="Enable GitHub Pages">
+    1. Go to your repository on GitHub
+    2. Click **Settings** → **Pages**
+    3. Under **Source**, select:
+       - Branch: `main`
+       - Folder: `/ (root)`
+    4. Click **Save**
+  </Step>
+
+  <Step title="Wait for deployment">
+    GitHub will automatically build and deploy your site. This typically takes 1-2 minutes.
+
+    Your site will be available at: `https://yourusername.github.io/buildpro-construction/`
+  </Step>
+
+  <Step title="Fix navigation paths (if needed)">
+    If your repository name is not your root domain, you may need to update paths.
+
+    For example, if your site is at `https://yourusername.github.io/buildpro-construction/`, update navigation links:
+
+    ```html Before
+    <a href="index.html">Home</a>
+    <a href="pages/about.html">About</a>
+    ```
+
+    ```html After (if using subdirectory)
+    <a href="/buildpro-construction/index.html">Home</a>
+    <a href="/buildpro-construction/pages/about.html">About</a>
+    ```
+
+    <Warning>
+    Test all navigation links after deployment to ensure they work correctly with your base path.
+    </Warning>
+  </Step>
+
+  <Step title="Configure custom domain (optional)">
+    1. Add a `CNAME` file to your repository root with your domain:
+
+    ```text CNAME
+    buildpro.com
+    ```
+
+    2. Configure DNS with your domain provider:
+       - Add a CNAME record pointing to `yourusername.github.io`
+    3. Enable **Enforce HTTPS** in GitHub Pages settings
+  </Step>
+</Steps>
+
+### Automated deployment workflow
+
+GitHub Pages automatically deploys when you push to the configured branch:
+
+```bash
+git add .
+git commit -m "Update services page"
+git push origin main
+```
+
+## Deploy to Railway
+
+Railway offers a modern deployment experience with excellent developer tools.
+
+<Steps>
+  <Step title="Push your code to GitHub">
+    Ensure your code is in a GitHub repository.
+  </Step>
+
+  <Step title="Sign up for Railway">
+    Go to [railway.app](https://railway.app) and sign up with your GitHub account.
+  </Step>
+
+  <Step title="Create a new project">
+    1. Click **New Project** → **Deploy from GitHub repo**
+    2. Select your `buildpro-construction` repository
+  </Step>
+
+  <Step title="Configure as static site">
+    Railway needs a simple server to serve static files. Create a `railway.json` configuration:
+
+    ```json railway.json
+    {
+      "$schema": "https://railway.app/railway.schema.json",
+      "build": {
+        "builder": "NIXPACKS"
+      },
+      "deploy": {
+        "startCommand": "npx serve . -p $PORT",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      }
+    }
+    ```
+
+    This uses `serve` to host your static files.
+
+    <Info>
+    Railway will automatically install `serve` - no package.json needed.
+    </Info>
+  </Step>
+
+  <Step title="Deploy">
+    Railway will automatically:
+
+    - Build and deploy your site
+    - Provide a URL like `https://buildpro-construction.railway.app`
+    - Set up continuous deployment from GitHub
+  </Step>
+
+  <Step title="Add custom domain (optional)">
+    1. Go to your project settings
+    2. Click **Networking** → **Custom Domain**
+    3. Enter your domain and follow DNS instructions
+  </Step>
+</Steps>
+
+## Comparison table
+
+Choose the platform that best fits your needs:
+
+| Feature | Netlify | Vercel | GitHub Pages | Railway |
+|---------|---------|--------|--------------|----------|
+| **Free tier** | Yes | Yes | Yes | Yes |
+| **Custom domain** | Yes | Yes | Yes | Yes |
+| **Auto HTTPS** | Yes | Yes | Yes | Yes |
+| **Build time** | None needed | None needed | None needed | ~30s (server setup) |
+| **Deployment speed** | ~30s | ~20s | ~1-2 min | ~1 min |
+| **Preview deploys** | Yes | Yes | No | Yes |
+| **Best for** | General use | Performance | Open source | Full-stack projects |
+
+<Note>
+For a pure static site like BuildPro Construction, **Netlify** or **Vercel** are recommended for the best developer experience.
+</Note>
+
+## Post-deployment checklist
+
+After deploying your site, verify everything works correctly:
+
+<Steps>
+  <Step title="Test all pages">
+    - Home (`/`)
+    - About (`/pages/about.html`)
+    - Services (`/pages/services.html`)
+    - Projects (`/pages/projects.html`)
+    - Contact (`/pages/contact.html`)
+  </Step>
+
+  <Step title="Test interactive features">
+    - Projects filter (All, Residential, Commercial)
+    - Contact form submission
+    - Navigation links between pages
+  </Step>
+
+  <Step title="Verify responsiveness">
+    Test the site on:
+    - Desktop (1920px, 1440px, 1024px)
+    - Tablet (768px)
+    - Mobile (375px, 414px)
+  </Step>
+
+  <Step title="Check performance">
+    Run a [Google PageSpeed Insights](https://pagespeed.web.dev/) test to verify performance scores.
+
+    <Info>
+    Static sites typically score 90+ on all metrics out of the box.
+    </Info>
+  </Step>
+
+  <Step title="Configure form endpoint">
+    Update Formspree form ID in `index.html` and `pages/contact.html` (see Quickstart guide).
+  </Step>
+
+  <Step title="Set up monitoring (optional)">
+    Consider adding:
+    - Google Analytics for traffic monitoring
+    - Hotjar or similar for user behavior tracking
+    - Uptime monitoring (UptimeRobot, Pingdom)
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="404 errors on page navigation">
+    **Cause:** Incorrect file paths or missing files.
+
+    **Solution:**
+    - Verify all HTML files exist in the correct directories
+    - Check that navigation links use correct relative paths
+    - For GitHub Pages, ensure base path is correct if using a project subdirectory
+  </Accordion>
+
+  <Accordion title="Styles not loading">
+    **Cause:** Incorrect CSS file paths.
+
+    **Solution:**
+    - Verify `<link>` tags in HTML files point to correct CSS location
+    - Check that `assets/css/main.css` exists
+    - Ensure `@import` statements in `main.css` use correct paths
+  </Accordion>
+
+  <Accordion title="Images not displaying">
+    **Cause:** Broken image URLs or incorrect paths.
+
+    **Solution:**
+    - If using external URLs (Unsplash), verify they're accessible
+    - If using local images, ensure they're committed to your repository
+    - Check image paths relative to the HTML file location
+  </Accordion>
+
+  <Accordion title="Contact form not working">
+    **Cause:** Formspree endpoint not configured.
+
+    **Solution:**
+    - Sign up for Formspree and create a form
+    - Update the `action` attribute in both `index.html` and `pages/contact.html`
+    - Test form submission after updating
+  </Accordion>
+
+  <Accordion title="Project filter not working">
+    **Cause:** JavaScript file not loaded or path incorrect.
+
+    **Solution:**
+    - Verify `<script src="../assets/js/projects-filter.js"></script>` exists in `pages/projects.html`
+    - Check browser console (F12) for JavaScript errors
+    - Ensure data attributes (`data-filter`, `data-type`) match the JavaScript logic
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Monitor performance" icon="chart-line">
+    Set up Google Analytics and track visitor behavior
+  </Card>
+  <Card title="SEO optimization" icon="magnifying-glass">
+    Add meta descriptions, Open Graph tags, and structured data
+  </Card>
+  <Card title="Custom domain" icon="globe">
+    Configure your own domain name for professional branding
+  </Card>
+  <Card title="Continuous improvement" icon="arrows-rotate">
+    Iterate based on user feedback and analytics data
+  </Card>
+</CardGroup>

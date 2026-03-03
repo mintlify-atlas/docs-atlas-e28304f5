@@ -1,0 +1,128 @@
+---
+title: Site navigation
+description: Understand the navigation structure and header implementation across the BuildPro website
+---
+
+The BuildPro website uses a consistent header navigation pattern across all pages with proper active state highlighting.
+
+## Navigation structure
+
+The site includes five main pages:
+
+- Home (`index.html`)
+- About (`pages/about.html`)
+- Services (`pages/services.html`)
+- Projects (`pages/projects.html`)
+- Contact (`pages/contact.html`)
+
+## Header HTML structure
+
+The header consists of a brand logo/link and a navigation menu:
+
+```html
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">BuildPro Construction</a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/services.html">Services</a>
+      <a href="pages/projects.html">Projects</a>
+      <a href="pages/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+```
+
+## Active page highlighting
+
+The `.active` class is manually applied to the current page's navigation link to provide visual feedback:
+
+**On the homepage (`index.html`):**
+```html
+<a href="index.html" class="active">Home</a>
+```
+
+**On the Contact page (`pages/contact.html`):**
+```html
+<a href="contact.html" class="active">Contact</a>
+```
+
+## Path differences by location
+
+<Warning>
+  Navigation paths vary depending on whether the file is in the root directory or the `pages/` subdirectory.
+</Warning>
+
+### From the homepage (root)
+
+```html
+<a class="brand" href="index.html">BuildPro Construction</a>
+<nav class="nav-links">
+  <a href="index.html">Home</a>
+  <a href="pages/about.html">About</a>
+  <a href="pages/services.html">Services</a>
+  <a href="pages/projects.html">Projects</a>
+  <a href="pages/contact.html">Contact</a>
+</nav>
+```
+
+### From pages subdirectory
+
+```html
+<a class="brand" href="../index.html">BuildPro Construction</a>
+<nav class="nav-links">
+  <a href="../index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
+</nav>
+```
+
+Notice the use of `../` to navigate up one directory level when linking from pages in the `pages/` folder.
+
+## Adding a new page to navigation
+
+<Steps>
+  <Step title="Create the new page">
+    Create your new HTML file in the appropriate directory (root for top-level pages, or `pages/` subdirectory).
+  </Step>
+
+  <Step title="Update all navigation menus">
+    Add the new link to the `<nav class="nav-links">` section in **every page**:
+
+    **In `index.html`:**
+    ```html
+    <a href="pages/gallery.html">Gallery</a>
+    ```
+
+    **In all `pages/*.html` files:**
+    ```html
+    <a href="gallery.html">Gallery</a>
+    ```
+  </Step>
+
+  <Step title="Set the active state">
+    On the new page itself, add the `.active` class to its own navigation link:
+
+    ```html
+    <a href="gallery.html" class="active">Gallery</a>
+    ```
+  </Step>
+
+  <Step title="Verify all links">
+    Test navigation from every page to ensure all links work correctly and the active states display properly.
+  </Step>
+</Steps>
+
+## Styling
+
+The header is styled in `assets/css/main.css` with:
+
+- `.site-header` - Header container with background color
+- `.brand` - Logo/brand link styling
+- `.nav-links` - Navigation menu layout
+- `.active` - Highlights the current page in the navigation
+
+No JavaScript is required for the navigation system.

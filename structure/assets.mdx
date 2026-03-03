@@ -1,0 +1,570 @@
+---
+title: Assets organization
+description: Documentation for CSS stylesheets and JavaScript files in the BuildPro Construction website
+---
+
+All static assets are organized in the `source/assets/` directory, with separate subdirectories for CSS and JavaScript files.
+
+## CSS architecture
+
+The project uses a modular CSS architecture where `main.css` serves as the entry point and imports all other stylesheets.
+
+### main.css
+
+Location: `source/assets/css/main.css`
+
+The main stylesheet that imports all CSS modules in a specific order:
+
+```css title="source/assets/css/main.css"
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./components.css");
+@import url("./sections.css");
+@import url("./responsive.css");
+```
+
+**Import order matters**: Base styles load first, followed by layout, components, sections, and finally responsive overrides.
+
+### base.css
+
+Location: `source/assets/css/base.css`
+
+Foundational styles including CSS custom properties, resets, and base element styling.
+
+<Accordion title="CSS custom properties (variables)">
+  ```css
+  :root {
+    --primary: #1e3a8a;      /* Dark blue */
+    --secondary: #f97316;    /* Orange */
+    --bg: #f3f4f6;          /* Light gray background */
+    --text: #111827;        /* Dark text */
+    --white: #ffffff;
+    --muted: #6b7280;       /* Muted gray text */
+    --radius: 14px;         /* Border radius */
+    --shadow: 0 10px 25px rgba(17, 24, 39, 0.08); /* Box shadow */
+  }
+  ```
+  
+  These variables are used throughout the project for consistent theming.
+</Accordion>
+
+<Accordion title="Global resets and base styles">
+  - Universal box-sizing: `border-box`
+  - HTML/body: Margin/padding reset, font family, smooth scrolling
+  - Images: `max-width: 100%`, `display: block`
+  - Links: No text decoration, inherit color
+  - Form elements: Consistent padding, borders, border-radius
+</Accordion>
+
+<Accordion title="Form element styles">
+  ```css
+  input, textarea, select {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #fff;
+    font: inherit;
+  }
+  
+  textarea {
+    min-height: 130px;
+    resize: vertical;
+  }
+  ```
+</Accordion>
+
+### layout.css
+
+Location: `source/assets/css/layout.css`
+
+Container systems, grid layouts, header, and footer styles.
+
+<Accordion title="Container and sections">
+  ```css
+  .container {
+    width: min(1120px, 92%);
+    margin: 0 auto;
+  }
+  
+  .section {
+    padding: 4.5rem 0;
+  }
+  ```
+  
+  Container provides consistent max-width with responsive padding.
+</Accordion>
+
+<Accordion title="Header navigation">
+  - Sticky header with white background
+  - Flexbox layout for brand and navigation links
+  - Active link highlighting with orange color
+  - Hover effects on navigation items
+  
+  ```css
+  .site-header {
+    background: var(--white);
+    box-shadow: 0 1px 0 rgba(17, 24, 39, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  ```
+</Accordion>
+
+<Accordion title="Grid systems">
+  Three main grid patterns:
+  
+  **Two-column grid:**
+  ```css
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: center;
+  }
+  ```
+  
+  **Card grid (3 columns):**
+  ```css
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  ```
+  
+  **Contact grid:**
+  ```css
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.2rem;
+  }
+  ```
+</Accordion>
+
+<Accordion title="Footer">
+  ```css
+  .site-footer {
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 1.4rem 0;
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  ```
+</Accordion>
+
+### components.css
+
+Location: `source/assets/css/components.css`
+
+Reusable UI components like buttons, cards, and lists.
+
+<Accordion title="Button styles">
+  ```css
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary {
+    background: var(--secondary);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+  }
+  
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--primary);
+  }
+  ```
+  
+  Buttons have hover lift effect for better interactivity.
+</Accordion>
+
+<Accordion title="Card component">
+  ```css
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(17, 24, 39, 0.12);
+  }
+  ```
+  
+  Cards have hover effect with upward movement and stronger shadow.
+</Accordion>
+
+<Accordion title="Service icon">
+  ```css
+  .service-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: inline-grid;
+    place-items: center;
+    background: rgba(30, 58, 138, 0.1);
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  ```
+</Accordion>
+
+<Accordion title="Check list">
+  Custom list style with emoji checkmarks:
+  
+  ```css
+  .check-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.8rem;
+  }
+  
+  .check-list li::before {
+    content: "✅ ";
+  }
+  ```
+</Accordion>
+
+<Accordion title="Team images">
+  ```css
+  .team-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+  }
+  ```
+</Accordion>
+
+### sections.css
+
+Location: `source/assets/css/sections.css`
+
+Page-specific section styles including hero, gallery, services, and projects.
+
+<Accordion title="Hero section">
+  ```css
+  .hero {
+    min-height: 78vh;
+    display: grid;
+    align-items: center;
+    background:
+      linear-gradient(rgba(30, 58, 138, 0.65), rgba(17, 24, 39, 0.7)),
+      url("https://images.unsplash.com/photo-1541888946425-d81bb19240f5...") 
+      center/cover no-repeat;
+    color: #fff;
+  }
+  
+  .hero h1 {
+    font-size: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+    margin: 0 0 0.9rem;
+    line-height: 1.1;
+  }
+  ```
+  
+  Full-height hero with background image and gradient overlay. Uses `clamp()` for responsive typography.
+</Accordion>
+
+<Accordion title="Gallery grid">
+  ```css
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+  
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+  
+  .caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    background: linear-gradient(transparent, rgba(17, 24, 39, 0.75));
+    color: #fff;
+    padding: 1rem;
+    font-weight: 600;
+  }
+  ```
+  
+  Images zoom on hover, captions overlay at bottom with gradient.
+</Accordion>
+
+<Accordion title="Page hero">
+  ```css
+  .page-hero {
+    background: linear-gradient(130deg, #1e3a8a, #1e40af);
+    color: #fff;
+    padding: 4.2rem 0;
+  }
+  ```
+  
+  Gradient background header for secondary pages.
+</Accordion>
+
+<Accordion title="Project filters">
+  ```css
+  .filter-btn {
+    background: #fff;
+    color: var(--primary);
+    border: 1px solid #c7d2fe;
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+  ```
+  
+  Pill-shaped filter buttons with active state.
+</Accordion>
+
+<Accordion title="Service cards">
+  ```css
+  .service-card {
+    padding: 1rem;
+  }
+  
+  .service-pill {
+    display: inline-block;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(30, 58, 138, 0.1);
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  /* Alternate layout for even cards */
+  .service-card:nth-child(even) .service-content {
+    order: 2;
+  }
+  
+  .service-card:nth-child(even) .service-image {
+    order: 1;
+  }
+  ```
+  
+  Service cards alternate between left-image and right-image layouts.
+</Accordion>
+
+### responsive.css
+
+Location: `source/assets/css/responsive.css`
+
+Media queries for tablet and mobile responsiveness.
+
+<Accordion title="Tablet breakpoint (max-width: 980px)">
+  ```css
+  @media (max-width: 980px) {
+    .grid-2,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .service-card:nth-child(even) .service-content,
+    .service-card:nth-child(even) .service-image {
+      order: initial;
+    }
+    
+    .card-grid,
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  ```
+  
+  - Two-column grids become single column
+  - Card grids reduce from 3 to 2 columns
+  - Service card alternating layout is removed
+</Accordion>
+
+<Accordion title="Mobile breakpoint (max-width: 640px)">
+  ```css
+  @media (max-width: 640px) {
+    .section {
+      padding: 3.2rem 0;
+    }
+    
+    .nav-links {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .card-grid,
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero {
+      min-height: 70vh;
+    }
+  }
+  ```
+  
+  - All grids become single column
+  - Navigation links spread across full width
+  - Section padding is reduced
+  - Hero height is reduced
+</Accordion>
+
+## JavaScript files
+
+Currently the project has minimal JavaScript with only one file for interactive functionality.
+
+### projects-filter.js
+
+Location: `source/assets/js/projects-filter.js`
+
+Handles the project filtering functionality on the projects page.
+
+<Accordion title="How it works">
+  The script listens for clicks on filter buttons and shows/hides project cards based on their `data-type` attribute.
+  
+  ```javascript
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-item");
+    
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedType = button.dataset.filter;
+        
+        // Update active button
+        filterButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        
+        // Show/hide cards
+        projectCards.forEach((card) => {
+          const type = card.dataset.type;
+          const shouldShow = selectedType === "all" || selectedType === type;
+          card.style.display = shouldShow ? "block" : "none";
+        });
+      });
+    });
+  });
+  ```
+</Accordion>
+
+<Accordion title="Usage in projects.html">
+  **Filter buttons:**
+  ```html
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="residential">Residential</button>
+  <button class="filter-btn" data-filter="commercial">Commercial</button>
+  ```
+  
+  **Project cards:**
+  ```html
+  <article class="card project-item" data-type="residential">
+    <!-- Project content -->
+  </article>
+  <article class="card project-item" data-type="commercial">
+    <!-- Project content -->
+  </article>
+  ```
+  
+  **Script inclusion:**
+  ```html
+  <script src="../assets/js/projects-filter.js"></script>
+  ```
+</Accordion>
+
+<Accordion title="Key features">
+  - Only runs if both filter buttons and project cards are found on the page
+  - Updates button active state on click
+  - Filters cards by matching `data-filter` with `data-type`
+  - "All" filter shows all cards
+  - Uses simple `display: none/block` for show/hide functionality
+</Accordion>
+
+## Asset loading
+
+### CSS loading
+
+All pages load only `main.css`, which imports all other stylesheets:
+
+```html
+<!-- From index.html -->
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<!-- From pages/ directory -->
+<link rel="stylesheet" href="../assets/css/main.css" />
+```
+
+This ensures:
+- Single HTTP request for all CSS
+- Consistent styles across all pages
+- Modular organization for development
+
+### JavaScript loading
+
+JavaScript is loaded only where needed:
+
+```html
+<!-- Only on projects.html -->
+<script src="../assets/js/projects-filter.js"></script>
+```
+
+Script is placed at the end of the `<body>` to ensure DOM is loaded before execution.
+
+## Performance considerations
+
+<CardGroup cols={2}>
+  <Card title="CSS optimization" icon="gauge">
+    - All CSS loaded via single `main.css` file
+    - Modular organization for maintainability
+    - Mobile-first responsive design
+    - Efficient use of CSS custom properties
+  </Card>
+  <Card title="JavaScript efficiency" icon="zap">
+    - Minimal JavaScript usage
+    - Scripts loaded only on pages that need them
+    - Event delegation for filter buttons
+    - DOM-ready check before execution
+  </Card>
+</CardGroup>
+
+<CardGroup cols={2}>
+  <Card title="Project structure" href="/structure/overview" icon="sitemap">
+    Back to structure overview
+  </Card>
+  <Card title="HTML pages" href="/structure/pages" icon="file-code">
+    Learn about each HTML page
+  </Card>
+</CardGroup>

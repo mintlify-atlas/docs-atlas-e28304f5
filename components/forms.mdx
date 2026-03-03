@@ -1,0 +1,189 @@
+---
+title: Form components
+description: Form elements including inputs, textareas, labels, and form layouts
+---
+
+## Form group
+
+Form groups provide consistent spacing between form fields.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required />
+    </div>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .form-group {
+      margin-bottom: 0.95rem;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Form groups add 0.95rem bottom margin to create visual separation between fields.
+
+## Labels
+
+Form labels are displayed as block elements with semi-bold weight.
+
+```css
+label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+```
+
+Labels use block display to appear above inputs, have 0.45rem spacing below, and 600 font weight for emphasis.
+
+## Text inputs
+
+Input fields have consistent styling with border, padding, and rounded corners.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+    </div>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background: #fff;
+      font: inherit;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Inputs span full width of their container, have 0.75rem vertical and 0.85rem horizontal padding, light gray border (#d1d5db), 10px border radius, white background, and inherit parent font styles.
+
+## Textarea
+
+Textareas are styled identically to inputs with additional height control.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Textareas have a minimum height of 130px and can only be resized vertically (not horizontally) to maintain layout integrity.
+
+## Complete contact form
+
+Here's a full contact form example from the BuildPro website:
+
+```html
+<form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+  <h2>Send Us a Message</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input id="phone" name="phone" type="tel" required />
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+```
+
+The form is wrapped in a `.card` class for white background and shadow. Each input is wrapped in a `.form-group` for consistent spacing. The submit button uses button component styling (see [Buttons](/components/buttons)).
+
+## Form in grid layout
+
+Contact forms often appear alongside information cards using the contact grid:
+
+```html
+<div class="contact-grid">
+  <form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="tel" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <aside class="card">
+    <h3>Contact Information</h3>
+    <p><strong>Phone:</strong> +855 12 345 678</p>
+    <p><strong>Email:</strong> info@buildpro.com</p>
+    <p><strong>Location:</strong> Phnom Penh, Cambodia</p>
+  </aside>
+</div>
+```
+
+The `.contact-grid` layout (1.15fr 0.85fr) gives the form slightly more width than the contact information sidebar.
+
+## Input types
+
+BuildPro forms use standard HTML5 input types:
+
+<CodeGroup>
+
+```html Text input
+<input id="name" name="name" type="text" required />
+```
+
+```html Email input
+<input id="email" name="email" type="email" required />
+```
+
+```html Phone input
+<input id="phone" name="phone" type="tel" required />
+```
+
+```html Textarea
+<textarea id="message" name="message" required></textarea>
+```
+
+</CodeGroup>
+
+All inputs use the `required` attribute for built-in HTML5 validation. Email and phone types provide appropriate mobile keyboards and basic format validation.

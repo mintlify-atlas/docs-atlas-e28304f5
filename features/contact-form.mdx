@@ -1,0 +1,107 @@
+---
+title: Contact form integration
+description: Learn how the Formspree contact form is configured and how to customize it
+---
+
+The BuildPro website uses [Formspree](https://formspree.io/) to handle contact form submissions without requiring backend code. Forms are present on both the homepage and the dedicated Contact page.
+
+## Form HTML structure
+
+The contact form collects four fields: name, phone, email, and message.
+
+```html
+<form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+  <h2>Send Us a Message</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input id="phone" name="phone" type="tel" required />
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+```
+
+## How to configure Formspree
+
+<Steps>
+  <Step title="Create a Formspree account">
+    Go to [formspree.io](https://formspree.io/) and sign up for a free account.
+  </Step>
+
+  <Step title="Create a new form">
+    In your Formspree dashboard, click "New Form" and give it a name like "BuildPro Contact Form".
+  </Step>
+
+  <Step title="Copy your form endpoint">
+    Formspree will provide you with a unique endpoint URL that looks like:
+    
+    ```
+    https://formspree.io/f/xyzabc123
+    ```
+  </Step>
+
+  <Step title="Update the form action attribute">
+    Replace `your-form-id` in both forms with your actual Formspree endpoint:
+
+    **In `index.html` (line 147):**
+    ```html
+    <form class="card" action="https://formspree.io/f/xyzabc123" method="POST">
+    ```
+
+    **In `pages/contact.html` (line 32):**
+    ```html
+    <form class="card" action="https://formspree.io/f/xyzabc123" method="POST">
+    ```
+  </Step>
+
+  <Step title="Test the form">
+    Open the website, fill out the contact form, and submit it. Check your Formspree dashboard to confirm the submission was received.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not commit your actual Formspree endpoint to public repositories if you want to avoid spam. Consider using environment-specific configuration or Formspree's spam protection features.
+</Warning>
+
+## Form validation
+
+All fields use HTML5 validation with the `required` attribute:
+
+- **Name:** Required text input
+- **Phone:** Required telephone input (`type="tel"`)
+- **Email:** Required email input with format validation (`type="email"`)
+- **Message:** Required textarea
+
+## Customizing form fields
+
+To add or modify fields:
+
+1. Add a new form group with the same structure:
+   ```html
+   <div class="form-group">
+     <label for="company">Company</label>
+     <input id="company" name="company" type="text" />
+   </div>
+   ```
+
+2. The `name` attribute value will appear in your Formspree submission data
+
+3. Use `required` attribute for mandatory fields
+
+## Where forms are located
+
+- **Homepage:** `index.html` (line 147)
+- **Contact page:** `pages/contact.html` (line 32)
+
+Both forms are identical and need to be updated together if you change the Formspree endpoint or form fields.

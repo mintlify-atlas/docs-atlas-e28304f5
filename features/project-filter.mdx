@@ -1,0 +1,103 @@
+---
+title: Project filtering system
+description: Learn how the JavaScript project filtering works on the Projects page
+---
+
+The BuildPro website includes an interactive filtering system that allows visitors to view projects by category (All, Residential, or Commercial).
+
+## How it works
+
+The filter system uses vanilla JavaScript with data attributes to show and hide project cards based on the selected category.
+
+### Filter buttons
+
+Each filter button has a `data-filter` attribute that corresponds to project types:
+
+```html
+<div class="filters">
+  <button class="filter-btn active" data-filter="all" type="button">All</button>
+  <button class="filter-btn" data-filter="residential" type="button">Residential</button>
+  <button class="filter-btn" data-filter="commercial" type="button">Commercial</button>
+</div>
+```
+
+### Project cards
+
+Each project card has a `data-type` attribute that identifies its category:
+
+```html
+<article class="card project-card project-item" data-type="residential">
+  <img src="..." alt="Modern Villa" />
+  <h3>Modern Villa</h3>
+  <p><strong>Location:</strong> Phnom Penh</p>
+  <p><strong>Type:</strong> Residential</p>
+</article>
+```
+
+## Complete JavaScript code
+
+The filtering logic is implemented in `assets/js/projects-filter.js`:
+
+```javascript
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-item");
+
+  if (!filterButtons.length || !projectCards.length) {
+    return;
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedType = button.dataset.filter;
+
+      filterButtons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+
+      projectCards.forEach((card) => {
+        const type = card.dataset.type;
+        const shouldShow = selectedType === "all" || selectedType === type;
+        card.style.display = shouldShow ? "block" : "none";
+      });
+    });
+  });
+});
+```
+
+## How to customize filter categories
+
+<Steps>
+  <Step title="Add a new filter button">
+    Add a new button with a unique `data-filter` value in `pages/projects.html`:
+
+    ```html
+    <button class="filter-btn" data-filter="renovation" type="button">Renovation</button>
+    ```
+  </Step>
+
+  <Step title="Add the data-type to project cards">
+    Apply the matching `data-type` attribute to relevant project cards:
+
+    ```html
+    <article class="card project-card project-item" data-type="renovation">
+      <h3>Kitchen Remodel</h3>
+      <!-- project content -->
+    </article>
+    ```
+  </Step>
+
+  <Step title="Test the filter">
+    Open `pages/projects.html` in a browser and click the new filter button to verify it shows only matching projects.
+  </Step>
+</Steps>
+
+<Warning>
+  The `data-filter` value on the button must exactly match the `data-type` value on the project cards (case-sensitive).
+</Warning>
+
+## Implementation checklist
+
+- Filter buttons must have the `.filter-btn` class and `data-filter` attribute
+- Project cards must have the `.project-item` class and `data-type` attribute
+- Include `projects-filter.js` at the bottom of the page before the closing `</body>` tag
+- The "All" button should have `data-filter="all"` and the `.active` class by default

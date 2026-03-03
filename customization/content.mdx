@@ -1,0 +1,380 @@
+---
+title: Modifying content
+description: Customize page content including services, projects, testimonials, and team information on your BuildPro Construction website.
+---
+
+This guide explains how to modify the content throughout your website to match your company's services, portfolio, and team.
+
+## Update hero section
+
+The hero section is the first thing visitors see on your homepage.
+
+### Edit hero heading and tagline
+
+Update the main heading and subtitle at `index.html:25-26`:
+
+```html
+<!-- Before -->
+<h1>We Build Your Future</h1>
+<p>Professional Construction & Renovation Services in Cambodia</p>
+
+<!-- After -->
+<h1>Your Custom Headline</h1>
+<p>Your company tagline and location</p>
+```
+
+### Modify call-to-action buttons
+
+Customize the hero buttons at `index.html:28-29`:
+
+```html
+<div class="hero-actions">
+  <a class="btn btn-primary" href="pages/contact.html">Get a Quote</a>
+  <a class="btn btn-secondary" href="pages/projects.html">View Projects</a>
+</div>
+```
+
+You can change the button text or links to match your priorities.
+
+## Customize services
+
+The website features services in two locations: homepage preview and dedicated services page.
+
+### Homepage service cards
+
+The homepage displays 6 service cards at `index.html:57-88`. Each card follows this structure:
+
+```html
+<article class="card">
+  <div class="service-icon">🏠</div>
+  <h3>Service Name</h3>
+  <p>Brief description of the service.</p>
+</article>
+```
+
+<Steps>
+  <Step title="Add or remove services">
+    To add a service, copy an existing `<article class="card">` block and paste it before the closing `</div>` at line 88.
+
+    To remove a service, delete the entire `<article>` block.
+  </Step>
+
+  <Step title="Edit service details">
+    For each service, update:
+    - **Icon**: Change the emoji between `<div class="service-icon">` tags
+    - **Title**: Update the `<h3>` heading
+    - **Description**: Modify the `<p>` paragraph
+
+    ```html
+    <article class="card">
+      <div class="service-icon">🏗️</div>
+      <h3>Your Service Name</h3>
+      <p>Description of what this service includes.</p>
+    </article>
+    ```
+  </Step>
+</Steps>
+
+### Services page detailed content
+
+The services page (`pages/services.html`) provides detailed information about each service with images and feature lists.
+
+**Service card structure** (example from `pages/services.html:32-44`):
+
+```html
+<article class="card grid-2 service-card">
+  <div class="service-content">
+    <span class="service-pill">Residential</span>
+    <h2>Residential Construction</h2>
+    <p>We build modern homes with focus on safety, comfort, and long-term durability.</p>
+    <ul class="service-features">
+      <li>Custom home planning and construction</li>
+      <li>Quality structural and finishing works</li>
+      <li>Strict quality and safety checks</li>
+    </ul>
+  </div>
+  <img class="service-image" src="https://images.unsplash.com/photo-..." alt="Residential service" />
+</article>
+```
+
+<Steps>
+  <Step title="Update service category badge">
+    Change the badge text in `<span class="service-pill">` to categorize your service (e.g., "Residential", "Commercial", "Specialty").
+  </Step>
+
+  <Step title="Edit service heading and description">
+    Update the `<h2>` title and `<p>` description to match your service offering.
+  </Step>
+
+  <Step title="Modify feature list">
+    Add, remove, or edit list items in the `<ul class="service-features">` section:
+
+    ```html
+    <ul class="service-features">
+      <li>Your first feature or benefit</li>
+      <li>Second key feature</li>
+      <li>Third advantage</li>
+    </ul>
+    ```
+  </Step>
+
+  <Step title="Update service image">
+    Replace the image URL with your own service photo. See the [images customization guide](/customization/images) for details.
+  </Step>
+</Steps>
+
+<Warning>
+  The services page contains **6 service cards** (lines 32-114). Keep your homepage and services page synchronized - if you add a service to one location, add it to the other for consistency.
+</Warning>
+
+## Edit about section
+
+The about section appears on both the homepage and dedicated about page.
+
+### Homepage about section
+
+Update the about preview at `index.html:42-48`:
+
+```html
+<h2 class="section-title">About Us</h2>
+<p class="section-subtitle">
+  BuildPro is a trusted construction company specializing in residential 
+  and commercial buildings with over 10 years of experience.
+</p>
+<p>
+  Our engineers, project managers, and skilled workers deliver high-standard 
+  results from planning to handover across Cambodia.
+</p>
+```
+
+Replace this content with your company's elevator pitch and key differentiators.
+
+### About page content
+
+The about page includes several sections you can customize:
+
+**Company history** (`pages/about.html:33-39`):
+```html
+<h2 class="section-title">Company History</h2>
+<p>
+  BuildPro was founded in 2015 with a mission to deliver safe, durable, 
+  and modern construction solutions. From small residential projects to 
+  large-scale commercial developments, we have successfully completed 
+  over 150 projects.
+</p>
+<p>
+  Our growth is built on quality workmanship, transparent communication, 
+  and long-term client relationships.
+</p>
+```
+
+**Mission statement** (`pages/about.html:52-55`):
+```html
+<h2>Mission</h2>
+<p>
+  To provide reliable construction and engineering services that exceed 
+  client expectations in quality, safety, and efficiency.
+</p>
+```
+
+**Vision statement** (`pages/about.html:58-61`):
+```html
+<h2>Vision</h2>
+<p>
+  To become one of Cambodia's leading construction companies known for 
+  innovation, integrity, and on-time project delivery.
+</p>
+```
+
+Update these sections to reflect your company's actual history, mission, and vision.
+
+## Manage team members
+
+The about page features a team section at `pages/about.html:69-97` with team member cards.
+
+### Team member card structure
+
+```html
+<article class="card">
+  <img
+    class="team-image"
+    src="https://images.unsplash.com/photo-...?auto=format&fit=crop&w=600&q=80"
+    alt="Team member name"
+  />
+  <h3>Mr. Sokha Chan</h3>
+  <p>Managing Director</p>
+</article>
+```
+
+<Steps>
+  <Step title="Add team members">
+    To add more team members, copy an existing `<article class="card">` block and paste it before the closing `</div>` at line 97.
+  </Step>
+
+  <Step title="Update team member details">
+    For each team member:
+    - Replace the image URL with a photo (see [images guide](/customization/images))
+    - Update the `alt` attribute with the person's name
+    - Change the `<h3>` to the person's name
+    - Modify the `<p>` to their job title or role
+  </Step>
+
+  <Step title="Remove team members">
+    Delete the entire `<article class="card">` block for any team member you want to remove.
+  </Step>
+</Steps>
+
+## Update projects showcase
+
+Projects appear on both the homepage gallery and the dedicated projects page.
+
+### Homepage project gallery
+
+The homepage shows 6 project images at `index.html:95-120`. Each project follows this pattern:
+
+```html
+<figure class="gallery-item">
+  <img src="https://images.unsplash.com/photo-..." alt="Project name" />
+  <figcaption class="caption">Modern Villa – Phnom Penh</figcaption>
+</figure>
+```
+
+Update each project:
+- Change the image URL to your project photo
+- Update the `alt` text with a descriptive name
+- Modify the caption with project name and location
+
+### Projects page
+
+The projects page (`pages/projects.html:38-75`) includes filterable project cards with more details:
+
+```html
+<article class="card project-card project-item" data-type="residential">
+  <img src="https://images.unsplash.com/photo-..." alt="Modern Villa" />
+  <h3>Modern Villa</h3>
+  <p><strong>Location:</strong> Phnom Penh</p>
+  <p><strong>Type:</strong> Residential</p>
+</article>
+```
+
+<Steps>
+  <Step title="Add or remove projects">
+    Copy an existing `<article>` block to add a project, or delete one to remove it.
+  </Step>
+
+  <Step title="Set project type for filtering">
+    Change the `data-type` attribute to either:
+    - `residential` - for homes, apartments, residential buildings
+    - `commercial` - for offices, retail, commercial properties
+
+    This controls which projects appear when users click filter buttons.
+  </Step>
+
+  <Step title="Update project details">
+    For each project:
+    - Replace the image URL
+    - Update the `<h3>` project name
+    - Change the location
+    - Set the type (Residential/Commercial)
+  </Step>
+</Steps>
+
+<Note>
+  The filter buttons at `pages/projects.html:32-36` automatically work based on the `data-type` attribute. You don't need to modify the filtering logic unless you want to add new categories.
+</Note>
+
+## Edit testimonials
+
+The homepage features a simple testimonial card at `index.html:135-139`:
+
+```html
+<article class="card testimonial">
+  <h3>Testimonials</h3>
+  <p>"Very professional and reliable team."</p>
+  <strong>– Mr. Dara</strong>
+</article>
+```
+
+<Steps>
+  <Step title="Replace testimonial content">
+    Update the quote and attribution:
+
+    ```html
+    <article class="card testimonial">
+      <h3>Testimonials</h3>
+      <p>"Your client's testimonial quote here."</p>
+      <strong>– Client Name, Company</strong>
+    </article>
+    ```
+  </Step>
+
+  <Step title="Add multiple testimonials (optional)">
+    To showcase multiple testimonials, copy the entire `<article>` block and adjust the grid layout by wrapping testimonials in a container.
+  </Step>
+</Steps>
+
+## Modify "Why Choose Us" section
+
+The features list at `index.html:128-133` highlights key differentiators:
+
+```html
+<h2 class="section-title">Why Choose Us</h2>
+<ul class="check-list">
+  <li>Experienced Engineers</li>
+  <li>On-Time Delivery</li>
+  <li>High-Quality Materials</li>
+  <li>Transparent Pricing</li>
+</ul>
+```
+
+Add, remove, or modify list items to reflect your company's unique selling points:
+
+```html
+<ul class="check-list">
+  <li>Your first competitive advantage</li>
+  <li>Second key benefit</li>
+  <li>Third unique feature</li>
+  <li>Fourth selling point</li>
+  <li>Optional fifth point</li>
+</ul>
+```
+
+## Update page headings and descriptions
+
+Each interior page has a hero section with a heading and description:
+
+**About page** (`pages/about.html:25-26`):
+```html
+<h1>About BuildPro</h1>
+<p>Trusted construction excellence across Cambodia.</p>
+```
+
+**Services page** (`pages/services.html:25-26`):
+```html
+<h1>Our Services</h1>
+<p class="services-intro">Complete construction and renovation solutions tailored to your goals.</p>
+```
+
+**Projects page** (`pages/projects.html:25-26`):
+```html
+<h1>Our Projects</h1>
+<p>Selected residential and commercial developments by BuildPro.</p>
+```
+
+**Contact page** (`pages/contact.html:25-26`):
+```html
+<h1>Contact Us</h1>
+<p>Reach out for quotes, consultations, and project discussions.</p>
+```
+
+Customize these headings and taglines to match your brand voice and messaging.
+
+## Content maintenance tips
+
+<Tip>
+  Keep your content:
+  - **Concise**: Use clear, brief descriptions that are easy to scan
+  - **Consistent**: Maintain the same tone and style across all pages
+  - **Current**: Regularly update projects, testimonials, and team information
+  - **Accurate**: Ensure all contact details and service descriptions are up-to-date
+</Tip>

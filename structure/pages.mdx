@@ -1,0 +1,343 @@
+---
+title: HTML pages
+description: Documentation for all HTML pages in the BuildPro Construction website
+---
+
+The website consists of five HTML pages: one homepage at the root level and four additional pages in the `pages/` directory.
+
+## Homepage (index.html)
+
+Location: `source/index.html`
+
+The main landing page of the BuildPro Construction website.
+
+### Key sections
+
+<Accordion title="Hero section">
+  Full-height hero banner with background image overlay featuring:
+  - Main headline: "We Build Your Future"
+  - Subheading about services
+  - Two call-to-action buttons (Get a Quote, View Projects)
+  - Background: Construction site image from Unsplash
+</Accordion>
+
+<Accordion title="About Us preview">
+  Two-column grid layout with:
+  - Construction team image
+  - Company introduction text
+  - Brief overview of BuildPro's experience and expertise
+</Accordion>
+
+<Accordion title="Services overview">
+  Card grid displaying six core services:
+  - Residential Construction 🏠
+  - Commercial Buildings 🏢
+  - Renovation & Remodeling 🔨
+  - Architectural Design 📐
+  - Electrical Installation ⚡
+  - Plumbing Services 🚰
+  
+  Each service has an icon, title, and description.
+</Accordion>
+
+<Accordion title="Projects showcase">
+  Gallery grid featuring 6 completed projects:
+  - Modern Villa – Phnom Penh
+  - Office Building – Siem Reap
+  - Retail Complex – Battambang
+  - Apartment Block – Phnom Penh
+  - Hotel Tower – Sihanoukville
+  - Home Renovation – Kampot
+  
+  Each with an image and caption overlay.
+</Accordion>
+
+<Accordion title="Why Choose Us & Testimonials">
+  Two-column layout with:
+  - Checklist of key benefits (Experienced Engineers, On-Time Delivery, etc.)
+  - Testimonial card with client feedback
+</Accordion>
+
+<Accordion title="Contact preview">
+  Contact form and information card with:
+  - Form fields: Name, Phone, Email, Message
+  - Contact information sidebar
+  - Formspree integration for form handling
+</Accordion>
+
+### Code example
+
+```html title="source/index.html" {6-7}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildPro Construction | Home</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <!-- Navigation -->
+    </header>
+    <!-- Page sections -->
+  </body>
+</html>
+```
+
+## About page
+
+Location: `source/pages/about.html`
+
+Detailed company information and team introduction.
+
+### Key sections
+
+<Accordion title="Page hero">
+  Gradient header with:
+  - Page title: "About BuildPro"
+  - Tagline: "Trusted construction excellence across Cambodia"
+</Accordion>
+
+<Accordion title="Company history">
+  Two-column layout with:
+  - Text card describing company founding (2015) and growth
+  - Blueprint and tools image
+  - Information about 150+ completed projects
+</Accordion>
+
+<Accordion title="Mission and vision">
+  Side-by-side cards displaying:
+  - **Mission**: Provide reliable construction services exceeding expectations
+  - **Vision**: Become Cambodia's leading construction company
+</Accordion>
+
+<Accordion title="Team members">
+  Three-column grid showcasing key team members:
+  - Mr. Sokha Chan - Managing Director
+  - Ms. Lina Pov - Lead Architect
+  - Mr. Vanna Kim - Project Engineer
+  
+  Each with profile photo and role.
+</Accordion>
+
+### Path references
+
+```html
+<!-- CSS reference uses ../ to go up one level -->
+<link rel="stylesheet" href="../assets/css/main.css" />
+
+<!-- Link to homepage -->
+<a href="../index.html">BuildPro Construction</a>
+
+<!-- Links to other pages in same directory -->
+<a href="services.html">Services</a>
+```
+
+## Services page
+
+Location: `source/pages/services.html`
+
+Comprehensive service offerings with detailed descriptions.
+
+### Key sections
+
+<Accordion title="Page hero">
+  Introduction section with:
+  - Title: "Our Services"
+  - Description: "Complete construction and renovation solutions"
+</Accordion>
+
+<Accordion title="Service cards (6 total)">
+  Each service card features:
+  - Category pill (Residential, Commercial, Renovation, Design, Electrical, Plumbing)
+  - Service title and description
+  - Feature list with bullet points
+  - Large service image
+  - Alternating left/right layout
+  
+  Services included:
+  1. Residential Construction
+  2. Commercial Buildings
+  3. Renovation & Remodeling
+  4. Architectural Design
+  5. Electrical Installation
+  6. Plumbing Services
+</Accordion>
+
+<Accordion title="Call-to-action card">
+  Final card encouraging consultation:
+  - Heading: "Need a Custom Construction Plan?"
+  - Description and CTA button
+  - Links to contact page
+</Accordion>
+
+### Code example
+
+```html title="source/pages/services.html"
+<article class="card grid-2 service-card">
+  <div class="service-content">
+    <span class="service-pill">Residential</span>
+    <h2>Residential Construction</h2>
+    <p>We build modern homes with focus on safety, comfort, and durability.</p>
+    <ul class="service-features">
+      <li>Custom home planning and construction</li>
+      <li>Quality structural and finishing works</li>
+      <li>Strict quality and safety checks</li>
+    </ul>
+  </div>
+  <img class="service-image" src="..." alt="Residential service" />
+</article>
+```
+
+## Projects page
+
+Location: `source/pages/projects.html`
+
+Portfolio showcase with filtering functionality.
+
+### Key sections
+
+<Accordion title="Page hero">
+  Simple header:
+  - Title: "Our Projects"
+  - Subtitle: "Selected residential and commercial developments"
+</Accordion>
+
+<Accordion title="Filter buttons">
+  Interactive filter controls:
+  - All (default active)
+  - Residential
+  - Commercial
+  
+  Connected to JavaScript for filtering functionality.
+</Accordion>
+
+<Accordion title="Project cards (6 total)">
+  Grid of project cards with `data-type` attributes:
+  
+  **Residential projects:**
+  - Modern Villa (Phnom Penh)
+  - Luxury Residence (Phnom Penh)
+  - Townhouse Renovation (Kampot)
+  
+  **Commercial projects:**
+  - Business Tower (Siem Reap)
+  - Retail Center (Battambang)
+  - Logistics Warehouse (Sihanoukville)
+  
+  Each card includes project image, name, location, and type.
+</Accordion>
+
+### JavaScript integration
+
+```html title="source/pages/projects.html" {4}
+<footer class="site-footer">
+  <!-- Footer content -->
+</footer>
+<script src="../assets/js/projects-filter.js"></script>
+```
+
+This page is the only one that loads JavaScript for the filtering functionality.
+
+## Contact page
+
+Location: `source/pages/contact.html`
+
+Contact information and inquiry form.
+
+### Key sections
+
+<Accordion title="Page hero">
+  Header section:
+  - Title: "Contact Us"
+  - Subtitle: "Reach out for quotes, consultations, and project discussions"
+</Accordion>
+
+<Accordion title="Contact form">
+  Form with Formspree integration:
+  - Name field (required)
+  - Phone field (required, type="tel")
+  - Email field (required, type="email")
+  - Message textarea (required)
+  - Submit button
+  
+  Action: `https://formspree.io/f/your-form-id`
+</Accordion>
+
+<Accordion title="Contact information card">
+  Company contact details:
+  - Phone: +855 12 345 678
+  - Email: info@buildpro.com
+  - Office: 128 Monivong Blvd, Phnom Penh, Cambodia
+</Accordion>
+
+<Accordion title="Office hours card">
+  Business hours:
+  - Monday - Friday: 8:00 AM - 6:00 PM
+  - Saturday: 8:00 AM - 1:00 PM
+  - Sunday: Closed
+</Accordion>
+
+<Accordion title="Map embed">
+  Google Maps iframe showing Phnom Penh location with:
+  - Responsive width (100%)
+  - Fixed height (420px)
+  - Lazy loading enabled
+</Accordion>
+
+### Code example
+
+```html title="source/pages/contact.html"
+<form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+  <h2>Send Us a Message</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+  <!-- More form fields -->
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+```
+
+## Common structure
+
+All pages share these common elements:
+
+### Header navigation
+
+```html
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">BuildPro Construction</a>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="services.html">Services</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+```
+
+The `active` class is applied to the current page link.
+
+### Footer
+
+```html
+<footer class="site-footer">
+  <div class="container">© 2026 BuildPro Construction. All rights reserved.</div>
+</footer>
+```
+
+Identical footer appears on all pages.
+
+<CardGroup cols={2}>
+  <Card title="Project structure" href="/structure/overview" icon="sitemap">
+    Back to structure overview
+  </Card>
+  <Card title="Assets organization" href="/structure/assets" icon="palette">
+    Learn about CSS and JavaScript files
+  </Card>
+</CardGroup>

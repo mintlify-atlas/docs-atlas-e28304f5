@@ -1,0 +1,112 @@
+---
+title: Button components
+description: Button styles including primary and secondary variants with hover effects
+---
+
+## Base button
+
+The base button class provides core structure and transitions.
+
+```css
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+```
+
+Buttons use inline-flex for centering content, have 0.8rem vertical and 1.2rem horizontal padding, 10px border radius, transparent border by default, bold font weight (700), and smooth transitions for transform, shadow, and background. On hover, all buttons lift 2px upward.
+
+## Primary button
+
+Primary buttons use the secondary orange color with shadow effects.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <a class="btn btn-primary" href="pages/contact.html">Get a Quote</a>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .btn-primary {
+      background: var(--secondary);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Primary buttons feature the secondary orange background (#f97316), white text, and an orange-tinted shadow with 8px vertical offset and 20px blur at 30% opacity. This creates a floating appearance that emphasizes call-to-action buttons.
+
+## Secondary button
+
+Secondary buttons have a light background with primary color text.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <a class="btn btn-secondary" href="pages/projects.html">View Projects</a>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(255, 255, 255, 0.95);
+      color: var(--primary);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Secondary buttons use a semi-transparent white background (92% opacity), slightly more opaque white border (95% opacity), and primary blue text color. This creates a subtle, ghost-like button style perfect for secondary actions.
+
+## Button group
+
+Buttons are commonly grouped in hero sections and other action areas:
+
+```html
+<div class="hero-actions">
+  <a class="btn btn-primary" href="pages/contact.html">Get a Quote</a>
+  <a class="btn btn-secondary" href="pages/projects.html">View Projects</a>
+</div>
+```
+
+Multiple buttons can be placed together to offer primary and secondary actions. The hero actions container provides spacing between buttons.
+
+## Button as form submit
+
+Buttons work as both links and form submit elements:
+
+<CodeGroup>
+
+```html Link button
+<a class="btn btn-primary" href="pages/contact.html">Get a Quote</a>
+```
+
+```html Submit button
+<button type="submit" class="btn btn-primary">Submit</button>
+```
+
+</CodeGroup>
+
+The same button classes apply to both `<a>` tags for navigation and `<button>` elements for form submission. Form submit buttons should include `type="submit"` for proper form handling.
+
+## Visual appearance
+
+**Primary buttons** have a bold orange background (#f97316 from `var(--secondary)`) with white text and a prominent orange-tinted shadow, making them stand out as the main call-to-action.
+
+**Secondary buttons** have a translucent white background with blue text (from `var(--primary)`, which is #1e3a8a), creating a softer, less prominent appearance suitable for alternative actions.
+
+Both button types lift 2px on hover, providing tactile feedback and improving user experience.

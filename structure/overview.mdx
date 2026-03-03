@@ -1,0 +1,108 @@
+---
+title: Project structure overview
+description: Understand the folder organization and architecture of the BuildPro Construction website
+---
+
+The BuildPro Construction website follows a clean, modular structure that separates HTML pages, CSS stylesheets, and JavaScript functionality into organized directories.
+
+## Folder structure
+
+Here's the complete directory tree of the project:
+
+```
+source/
+├── index.html              # Homepage (root level)
+├── pages/                  # Additional HTML pages
+│   ├── about.html         # Company information
+│   ├── services.html      # Service offerings
+│   ├── projects.html      # Project portfolio
+│   └── contact.html       # Contact form and info
+└── assets/                # Static assets
+    ├── css/               # Stylesheets
+    │   ├── main.css       # Main entry point (imports all CSS)
+    │   ├── base.css       # Base styles and variables
+    │   ├── layout.css     # Layout and grid systems
+    │   ├── components.css # Reusable components
+    │   ├── sections.css   # Page-specific sections
+    │   └── responsive.css # Media queries
+    └── js/                # JavaScript files
+        └── projects-filter.js  # Project filtering logic
+```
+
+## Design principles
+
+The project structure follows these key principles:
+
+<CardGroup cols={2}>
+  <Card title="Separation of concerns" icon="layer-group">
+    HTML, CSS, and JavaScript are organized into dedicated directories for easier maintenance
+  </Card>
+  <Card title="Modular CSS" icon="puzzle-piece">
+    Stylesheets are split by purpose (base, layout, components, sections, responsive)
+  </Card>
+  <Card title="Single-level navigation" icon="sitemap">
+    All pages except the homepage are in the `pages/` folder with relative path references
+  </Card>
+  <Card title="Asset centralization" icon="folder-open">
+    All static assets (CSS, JS, images) are centralized in the `assets/` directory
+  </Card>
+</CardGroup>
+
+## Navigation structure
+
+The website has a simple navigation hierarchy:
+
+- **Root level**: `index.html` (homepage)
+- **Secondary pages**: All other pages in `pages/` directory
+  - `about.html`
+  - `services.html`
+  - `projects.html`
+  - `contact.html`
+
+All pages share a consistent header navigation component that links between sections.
+
+## Asset organization
+
+### CSS architecture
+
+The CSS follows an import-based modular pattern:
+
+1. **main.css** - Entry point that imports all other stylesheets
+2. **base.css** - CSS variables, resets, and foundational styles
+3. **layout.css** - Container, grid, header, and footer layouts
+4. **components.css** - Reusable UI components (buttons, cards, forms)
+5. **sections.css** - Page-specific section styles (hero, gallery, services)
+6. **responsive.css** - Mobile and tablet media queries
+
+### JavaScript structure
+
+Currently minimal with a single file:
+
+- **projects-filter.js** - Handles filtering functionality on the projects page
+
+Additional JavaScript files can be added to the `assets/js/` directory as needed.
+
+## Path references
+
+### From index.html (root)
+```html
+<link rel="stylesheet" href="assets/css/main.css" />
+<a href="pages/about.html">About</a>
+```
+
+### From pages/ directory
+```html
+<link rel="stylesheet" href="../assets/css/main.css" />
+<a href="../index.html">Home</a>
+```
+
+All internal links use relative paths based on the file's location in the directory structure.
+
+<CardGroup cols={2}>
+  <Card title="HTML pages" href="/structure/pages" icon="file-code">
+    Learn about each page and its purpose
+  </Card>
+  <Card title="Assets organization" href="/structure/assets" icon="palette">
+    Explore CSS and JavaScript files
+  </Card>
+</CardGroup>

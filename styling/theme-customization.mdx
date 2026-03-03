@@ -1,0 +1,205 @@
+---
+title: Theme customization
+description: Customize BuildPro's color scheme and design tokens using CSS custom properties
+---
+
+BuildPro uses CSS custom properties (CSS variables) for theming, making it easy to customize colors, spacing, and other design tokens throughout the entire website.
+
+## CSS variables reference
+
+All theme variables are defined in `base.css` within the `:root` selector:
+
+```css title="assets/css/base.css"
+:root {
+  --primary: #1e3a8a;      /* Primary brand color (blue) */
+  --secondary: #f97316;     /* Accent color (orange) */
+  --bg: #f3f4f6;           /* Background color (light gray) */
+  --text: #111827;         /* Main text color (dark gray) */
+  --white: #ffffff;        /* White */
+  --muted: #6b7280;        /* Muted text color (gray) */
+  --radius: 14px;          /* Border radius for cards/buttons */
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.08); /* Box shadow */
+}
+```
+
+## Color variables
+
+### Primary color
+
+Used for the brand identity, navigation elements, and primary UI elements:
+
+- Navigation brand text (layout.css:40)
+- Service icons (components.css:48)
+- Filter buttons (sections.css:91)
+- Page hero gradients (sections.css:62)
+
+### Secondary color
+
+Used for call-to-action buttons and accent elements:
+
+- Primary buttons (components.css:17)
+- Navigation hover states (layout.css:58)
+- Testimonial borders (components.css:78)
+- Service feature bullets (sections.css:160)
+
+### Background and text colors
+
+- `--bg` - Applied to the body background
+- `--text` - Default text color for body content
+- `--white` - Cards, header, and light UI elements
+- `--muted` - Subtitle and secondary text
+
+## Customizing the theme
+
+To customize the color scheme, edit the CSS variable values in `base.css`.
+
+<Tabs>
+  <Tab title="Default theme">
+    ```css title="assets/css/base.css"
+    :root {
+      --primary: #1e3a8a;      /* Blue */
+      --secondary: #f97316;     /* Orange */
+      --bg: #f3f4f6;
+      --text: #111827;
+    }
+    ```
+    
+    This creates a professional blue and orange color scheme suitable for construction and engineering businesses.
+  </Tab>
+  
+  <Tab title="Green theme">
+    ```css title="assets/css/base.css"
+    :root {
+      --primary: #047857;      /* Emerald green */
+      --secondary: #0891b2;     /* Cyan */
+      --bg: #f0fdf4;
+      --text: #111827;
+    }
+    ```
+    
+    A fresh green theme emphasizing sustainability and eco-friendly construction.
+  </Tab>
+  
+  <Tab title="Dark theme">
+    ```css title="assets/css/base.css"
+    :root {
+      --primary: #3b82f6;      /* Bright blue */
+      --secondary: #f59e0b;     /* Amber */
+      --bg: #0f172a;           /* Dark navy */
+      --text: #f1f5f9;         /* Light text */
+      --white: #1e293b;        /* Dark gray for cards */
+      --muted: #94a3b8;
+    }
+    ```
+    
+    A modern dark theme with high contrast for better readability in low-light environments.
+  </Tab>
+</Tabs>
+
+<Note>
+  After changing CSS variables, refresh your browser with a hard reload (Ctrl+Shift+R or Cmd+Shift+R) to clear the cache and see your changes.
+</Note>
+
+## Design token variables
+
+### Border radius
+
+```css
+--radius: 14px;
+```
+
+Controls the roundness of corners for cards, buttons, and form inputs. Used in:
+
+- `.card` component (components.css:30)
+- `.btn` component (components.css:6)
+- Form inputs (base.css:48)
+- Gallery items (sections.css:36)
+
+<Tabs>
+  <Tab title="Rounded (default)">
+    ```css
+    --radius: 14px;
+    ```
+    Modern, friendly appearance with noticeable rounded corners.
+  </Tab>
+  
+  <Tab title="Sharp">
+    ```css
+    --radius: 4px;
+    ```
+    Minimal rounding for a more traditional, formal look.
+  </Tab>
+  
+  <Tab title="Extra rounded">
+    ```css
+    --radius: 20px;
+    ```
+    Highly rounded for a playful, modern aesthetic.
+  </Tab>
+</Tabs>
+
+### Box shadow
+
+```css
+--shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+```
+
+Defines the default shadow for elevated elements like cards. The shadow creates depth and visual hierarchy.
+
+<Tip>
+  For a more dramatic shadow effect, increase the alpha value (the fourth number in rgba). For a subtler effect, decrease it. Example: `rgba(17, 24, 39, 0.15)` for a stronger shadow.
+</Tip>
+
+## Using variables in your code
+
+Reference theme variables using the `var()` function:
+
+```css
+.custom-element {
+  background: var(--primary);
+  color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+```
+
+You can also provide fallback values:
+
+```css
+.custom-element {
+  background: var(--primary, #1e3a8a);
+}
+```
+
+## Creating additional variables
+
+You can add custom variables to the `:root` selector in `base.css`:
+
+```css title="assets/css/base.css"
+:root {
+  /* Existing variables */
+  --primary: #1e3a8a;
+  --secondary: #f97316;
+  
+  /* Custom additions */
+  --accent: #8b5cf6;         /* Purple accent */
+  --success: #10b981;        /* Success state color */
+  --warning: #f59e0b;        /* Warning state color */
+  --error: #ef4444;          /* Error state color */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+```
+
+<Note>
+  Keep variable names semantic (describing purpose rather than value). Use `--primary` instead of `--blue`, so if you change from blue to green later, the name still makes sense.
+</Note>
+
+## Best practices
+
+- **Consistency** - Always use variables instead of hardcoded colors
+- **Contrast** - Ensure text colors have sufficient contrast against backgrounds (WCAG AA: 4.5:1 ratio)
+- **Testing** - Test theme changes across all pages and components
+- **Documentation** - Comment your custom variables to explain their purpose
+- **Fallbacks** - Provide fallback values for browsers that don't support CSS variables (pre-2016)

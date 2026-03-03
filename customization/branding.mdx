@@ -1,0 +1,302 @@
+---
+title: Customizing branding
+description: Update your company name, logo, colors, and contact information throughout the BuildPro Construction website.
+---
+
+This guide shows you how to rebrand the BuildPro Construction website with your own company identity, including name, colors, and contact details.
+
+## Update company name
+
+The company name "BuildPro Construction" appears in multiple locations across all HTML files. You'll need to update each occurrence to maintain consistency.
+
+### Locations to update
+
+<Steps>
+  <Step title="Update page titles">
+    Open each HTML file and find the `<title>` tag in the `<head>` section:
+
+    **Files to update:**
+    - `index.html:6`
+    - `pages/about.html:6`
+    - `pages/services.html:6`
+    - `pages/projects.html:6`
+    - `pages/contact.html:6`
+
+    ```html
+    <!-- Before -->
+    <title>BuildPro Construction | Home</title>
+
+    <!-- After -->
+    <title>YourCompany Construction | Home</title>
+    ```
+  </Step>
+
+  <Step title="Update header brand name">
+    Update the brand name in the header navigation on all pages:
+
+    **Files to update:**
+    - `index.html:12`
+    - `pages/about.html:12`
+    - `pages/services.html:12`
+    - `pages/projects.html:12`
+    - `pages/contact.html:12`
+
+    ```html
+    <!-- Before -->
+    <a class="brand" href="index.html">BuildPro Construction</a>
+
+    <!-- After -->
+    <a class="brand" href="index.html">YourCompany Construction</a>
+    ```
+  </Step>
+
+  <Step title="Update footer copyright">
+    Update the footer on all pages:
+
+    **Files to update:**
+    - `index.html:177`
+    - `pages/about.html:102`
+    - `pages/services.html:125`
+    - `pages/projects.html:80`
+    - `pages/contact.html:85`
+
+    ```html
+    <!-- Before -->
+    <div class="container">© 2026 BuildPro Construction. All rights reserved.</div>
+
+    <!-- After -->
+    <div class="container">© 2026 YourCompany Construction. All rights reserved.</div>
+    ```
+  </Step>
+
+  <Step title="Update content references">
+    Replace company name references in page content:
+
+    **index.html:44** - About section:
+    ```html
+    <!-- Before -->
+    BuildPro is a trusted construction company...
+
+    <!-- After -->
+    YourCompany is a trusted construction company...
+    ```
+
+    **pages/about.html:25** - Page heading:
+    ```html
+    <!-- Before -->
+    <h1>About BuildPro</h1>
+
+    <!-- After -->
+    <h1>About YourCompany</h1>
+    ```
+
+    **pages/about.html:35** - Company history:
+    ```html
+    <!-- Before -->
+    BuildPro was founded in 2015...
+
+    <!-- After -->
+    YourCompany was founded in 2015...
+    ```
+
+    **pages/projects.html:26** - Page description:
+    ```html
+    <!-- Before -->
+    <p>Selected residential and commercial developments by BuildPro.</p>
+
+    <!-- After -->
+    <p>Selected residential and commercial developments by YourCompany.</p>
+    ```
+
+    **pages/contact.html:73** - Map iframe title:
+    ```html
+    <!-- Before -->
+    title="BuildPro Office Location"
+
+    <!-- After -->
+    title="YourCompany Office Location"
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+  The company name appears in **20 locations** across 5 HTML files. Use your code editor's "Find and Replace" feature to update all instances at once:
+  
+  - Find: `BuildPro`
+  - Replace: `YourCompany`
+  - Files: `*.html` (all HTML files)
+</Warning>
+
+## Customize brand colors
+
+The website uses CSS custom properties (variables) for consistent theming. All colors are defined in `assets/css/base.css:1-10`.
+
+### Color variables
+
+```css
+:root {
+  --primary: #1e3a8a;      /* Primary blue - headers, buttons */
+  --secondary: #f97316;     /* Secondary orange - accents */
+  --bg: #f3f4f6;           /* Background gray */
+  --text: #111827;         /* Main text color */
+  --white: #ffffff;        /* White backgrounds */
+  --muted: #6b7280;        /* Muted text */
+  --radius: 14px;          /* Border radius */
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.08); /* Box shadow */
+}
+```
+
+<Steps>
+  <Step title="Choose your brand colors">
+    Identify your company's brand colors:
+    - Primary color (for headers, primary buttons, key elements)
+    - Secondary color (for accents, hover states, CTAs)
+    - Background color (optional, light neutral tone)
+  </Step>
+
+  <Step title="Update CSS variables">
+    Open `assets/css/base.css` and modify the `:root` section:
+
+    ```css
+    :root {
+      --primary: #0066cc;      /* Your primary brand color */
+      --secondary: #ff9900;    /* Your secondary/accent color */
+      --bg: #f3f4f6;          /* Keep or customize background */
+      --text: #111827;        /* Keep or customize text color */
+      --white: #ffffff;
+      --muted: #6b7280;
+      --radius: 14px;         /* Adjust border roundness if desired */
+      --shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+    }
+    ```
+  </Step>
+
+  <Step title="Test the changes">
+    Open your website in a browser and verify:
+    - Primary buttons use your primary color
+    - Navigation links and headings reflect your brand
+    - Hover states and accents use your secondary color
+    - Overall appearance matches your brand identity
+  </Step>
+</Steps>
+
+<Tip>
+  Use tools like [Adobe Color](https://color.adobe.com) or [Coolors](https://coolors.co) to generate professional color palettes that work well together.
+</Tip>
+
+## Update contact information
+
+Contact details appear on the homepage and contact page.
+
+### Phone number
+
+**Locations:**
+- `index.html:168` - Homepage contact section
+- `pages/contact.html:56` - Contact page info card
+
+```html
+<!-- Before -->
+<p><strong>Phone:</strong> +855 12 345 678</p>
+
+<!-- After -->
+<p><strong>Phone:</strong> +1 555 123 4567</p>
+```
+
+### Email address
+
+**Locations:**
+- `index.html:169` - Homepage contact section
+- `pages/contact.html:57` - Contact page info card
+
+```html
+<!-- Before -->
+<p><strong>Email:</strong> info@buildpro.com</p>
+
+<!-- After -->
+<p><strong>Email:</strong> info@yourcompany.com</p>
+```
+
+### Physical address
+
+**index.html:170** - Homepage:
+```html
+<!-- Before -->
+<p><strong>Location:</strong> Phnom Penh, Cambodia</p>
+
+<!-- After -->
+<p><strong>Location:</strong> Your City, Your Country</p>
+```
+
+**pages/contact.html:58** - Contact page (full address):
+```html
+<!-- Before -->
+<p><strong>Office:</strong> 128 Monivong Blvd, Phnom Penh, Cambodia</p>
+
+<!-- After -->
+<p><strong>Office:</strong> 123 Main Street, Your City, ST 12345</p>
+```
+
+### Office hours
+
+Update business hours on the contact page at `pages/contact.html:61-64`:
+
+```html
+<article class="card">
+  <h3>Office Hours</h3>
+  <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+  <p>Saturday: 8:00 AM - 1:00 PM</p>
+  <p>Sunday: Closed</p>
+</article>
+```
+
+### Contact form endpoint
+
+Update the form submission endpoint to receive inquiries:
+
+**Locations:**
+- `index.html:147` - Homepage contact form
+- `pages/contact.html:32` - Contact page form
+
+```html
+<!-- Before -->
+<form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+
+<!-- After -->
+<form class="card" action="https://formspree.io/f/YOUR_ACTUAL_FORM_ID" method="POST">
+```
+
+<Note>
+  Sign up at [Formspree.io](https://formspree.io) to get a free form endpoint. Replace `YOUR_ACTUAL_FORM_ID` with your unique form ID to start receiving submissions.
+</Note>
+
+### Google Maps location
+
+Update the embedded map on `pages/contact.html:74` to show your office location:
+
+```html
+<!-- Before -->
+src="https://maps.google.com/maps?q=Phnom%20Penh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+
+<!-- After -->
+src="https://maps.google.com/maps?q=Your+City+Address&t=&z=13&ie=UTF8&iwloc=&output=embed"
+```
+
+<Tip>
+  For a more precise map, visit [Google Maps](https://maps.google.com), search for your address, click "Share" → "Embed a map", and copy the iframe `src` URL.
+</Tip>
+
+## Branding checklist
+
+Before publishing your customized website, verify you've updated:
+
+- [ ] Company name in all 5 page titles
+- [ ] Header brand name on all 5 pages
+- [ ] Footer copyright on all 5 pages
+- [ ] Company name in page content (4 locations)
+- [ ] Primary and secondary colors in CSS
+- [ ] Phone number (2 locations)
+- [ ] Email address (2 locations)
+- [ ] Physical address (2 locations)
+- [ ] Office hours
+- [ ] Contact form endpoint (2 locations)
+- [ ] Google Maps embed location

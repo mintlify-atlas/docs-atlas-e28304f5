@@ -1,0 +1,334 @@
+---
+title: Replacing images
+description: Replace demo images from Unsplash with your own project photos, team headshots, and service images.
+---
+
+The BuildPro Construction website uses placeholder images from Unsplash. This guide shows you how to replace them with your own photos.
+
+## Understanding image locations
+
+The website uses images in several locations:
+
+- **Homepage about section**: Company overview image
+- **Homepage services section**: No images (uses emoji icons)
+- **Homepage projects gallery**: 6 project showcase images
+- **About page**: Company history image and 3 team member photos
+- **Services page**: 6 service-specific images
+- **Projects page**: 6 detailed project images
+
+## Current Unsplash images
+
+All images currently use Unsplash URLs with this format:
+```
+https://images.unsplash.com/photo-{id}?auto=format&fit=crop&w={width}&q=80
+```
+
+### Homepage images
+
+**About section image** (`index.html:36-37`):
+```html
+<img
+  src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80"
+  alt="Construction team discussing plans"
+  style="border-radius: 14px"
+/>
+```
+
+**Project gallery images** (`index.html:97-119`):
+- Modern Villa: `photo-1600585154340-be6161a56a0c`
+- Office Building: `photo-1486406146926-c627a92ad1ab`
+- Retail Complex: `photo-1448630360428-65456885c650`
+- Apartment Block: `photo-1545324418-cc1a3fa10c00`
+- Hotel Tower: `photo-1472224371017-08207f84aaae`
+- Home Renovation: `photo-1472224371017-08207f84aaae` (duplicate)
+
+### About page images
+
+**Company history image** (`pages/about.html:41-42`):
+```html
+<img
+  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80"
+  alt="Construction blueprint and tools"
+  style="border-radius: 14px"
+/>
+```
+
+**Team member photos** (`pages/about.html:71-93`):
+- Mr. Sokha Chan: `photo-1560250097-0b93528c311a`
+- Ms. Lina Pov: `photo-1573496359142-b8d87734a5a2`
+- Mr. Vanna Kim: `photo-1556157382-97eda2d62296`
+
+### Services page images
+
+**Service images** (`pages/services.html:43-113`):
+- Residential Construction: `photo-1570129477492-45c003edd2be`
+- Commercial Buildings: `photo-1487958449943-2429e8be8625`
+- Renovation & Remodeling: `photo-1505691938895-1758d7feb511`
+- Architectural Design: `photo-1503387762-592deb58ef4e`
+- Electrical Installation: `photo-1581092160607-ee22731f4f88`
+- Plumbing Services: `photo-1585704032915-c3400ca199e7`
+
+### Projects page images
+
+**Project images** (`pages/projects.html:40-74`):
+- Modern Villa: `photo-1613490493576-7fde63acd811`
+- Business Tower: `photo-1460317442991-0ec209397118`
+- Luxury Residence: `photo-1600607687939-ce8a6c25118c`
+- Retail Center: `photo-1431540015161-0bf868a2d407`
+- Townhouse Renovation: `photo-1599427303058-f04cbcf4756f`
+- Logistics Warehouse: `photo-1577415124269-fc1140a69e91`
+
+## Replacing images with your own
+
+You have two main options for hosting your images:
+
+1. **Local hosting**: Store images in your website directory
+2. **External hosting**: Use a cloud service like Cloudinary, Imgur, or AWS S3
+
+### Option 1: Local image hosting
+
+This is the recommended approach for a static website.
+
+<Steps>
+  <Step title="Create an images folder">
+    Create a directory structure for organizing your images:
+
+    ```bash
+    mkdir -p assets/images/projects
+    mkdir -p assets/images/services
+    mkdir -p assets/images/team
+    mkdir -p assets/images/about
+    ```
+  </Step>
+
+  <Step title="Prepare your images">
+    Before uploading:
+    - **Resize** images to appropriate dimensions (900-1200px width recommended)
+    - **Optimize** file sizes using tools like [TinyPNG](https://tinypng.com) or [Squoosh](https://squoosh.app)
+    - **Rename** files descriptively (e.g., `modern-villa.jpg`, `team-director.jpg`)
+    - **Use web formats**: JPG for photos, PNG for graphics with transparency
+  </Step>
+
+  <Step title="Upload images to folders">
+    Place your images in the appropriate folders:
+    - Project photos → `assets/images/projects/`
+    - Service images → `assets/images/services/`
+    - Team photos → `assets/images/team/`
+    - About/company images → `assets/images/about/`
+  </Step>
+
+  <Step title="Update image references">
+    Replace Unsplash URLs with local paths:
+
+    **Homepage example** (`index.html:36-37`):
+    ```html
+    <!-- Before -->
+    <img
+      src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80"
+      alt="Construction team discussing plans"
+      style="border-radius: 14px"
+    />
+
+    <!-- After -->
+    <img
+      src="assets/images/about/team-meeting.jpg"
+      alt="Our team reviewing construction plans"
+      style="border-radius: 14px"
+    />
+    ```
+
+    **Projects page example** (`pages/projects.html:40`):
+    ```html
+    <!-- Before -->
+    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80" alt="Modern Villa" />
+
+    <!-- After -->
+    <img src="../assets/images/projects/modern-villa.jpg" alt="Modern Villa - Phnom Penh" />
+    ```
+
+    Note: Pages in the `pages/` folder need `../` to go up one directory level.
+  </Step>
+</Steps>
+
+<Warning>
+  Pages in subdirectories require relative paths with `../` to access the assets folder:
+  
+  - **From index.html**: `assets/images/photo.jpg`
+  - **From pages/*.html**: `../assets/images/photo.jpg`
+</Warning>
+
+### Option 2: External image hosting
+
+For larger websites or CDN benefits, you can use external image hosting.
+
+<Steps>
+  <Step title="Choose an image hosting service">
+    Popular options:
+    - **Cloudinary**: Free tier, automatic optimization, transformations
+    - **Imgur**: Simple, free image hosting
+    - **AWS S3**: Scalable, requires AWS account
+    - **ImageKit**: CDN with optimization features
+  </Step>
+
+  <Step title="Upload images">
+    Follow your chosen service's upload process and obtain the public URLs for each image.
+  </Step>
+
+  <Step title="Replace URLs in HTML">
+    Update image `src` attributes with your hosted URLs:
+
+    ```html
+    <img
+      src="https://your-cloud-service.com/your-image.jpg"
+      alt="Project description"
+    />
+    ```
+  </Step>
+</Steps>
+
+## Image optimization guidelines
+
+Follow these best practices for optimal website performance:
+
+### File size and dimensions
+
+| Image Type | Recommended Width | Max File Size | Format |
+|------------|------------------|---------------|--------|
+| Hero/About images | 1200px | 200KB | JPG |
+| Project gallery | 900px | 150KB | JPG |
+| Team photos | 600px | 100KB | JPG |
+| Service images | 1000px | 180KB | JPG |
+
+<Tip>
+  Modern browsers support **WebP format**, which offers better compression than JPG. Consider converting images to WebP for faster loading times.
+</Tip>
+
+### Alt text best practices
+
+Always update the `alt` attribute when replacing images:
+
+```html
+<!-- Poor alt text -->
+<img src="project1.jpg" alt="project" />
+
+<!-- Good alt text -->
+<img src="modern-villa.jpg" alt="Modern three-story villa in Phnom Penh" />
+```
+
+Good alt text should:
+- Describe the image content clearly
+- Include relevant keywords naturally
+- Be concise (under 125 characters)
+- Provide context for screen readers
+
+### Responsive images (advanced)
+
+For better performance on mobile devices, consider using responsive images:
+
+```html
+<img
+  src="assets/images/projects/villa.jpg"
+  srcset="
+    assets/images/projects/villa-600.jpg 600w,
+    assets/images/projects/villa-900.jpg 900w,
+    assets/images/projects/villa-1200.jpg 1200w
+  "
+  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 900px"
+  alt="Modern villa project"
+/>
+```
+
+This serves different image sizes based on the user's device, reducing load times on mobile.
+
+## Batch replacing all images
+
+To replace all images efficiently:
+
+<Steps>
+  <Step title="Create an image inventory">
+    List all images you need by category:
+    - 1 company/about image
+    - 6 homepage project images
+    - 6 services page images
+    - 6 projects page images
+    - 3 team member photos
+    - 1 company history image
+
+    **Total: 23 images**
+  </Step>
+
+  <Step title="Gather and prepare photos">
+    Collect your photos and organize them by category. Ensure you have:
+    - High-quality, professional images
+    - Proper permissions/rights to use each image
+    - Consistent style and quality across similar image types
+  </Step>
+
+  <Step title="Optimize all images">
+    Batch process images using tools like:
+    - **ImageOptim** (Mac)
+    - **RIOT** (Windows)
+    - **Squoosh** (Web-based)
+    - **Sharp** (Node.js CLI)
+  </Step>
+
+  <Step title="Upload and replace systematically">
+    Work through one page at a time:
+    1. Homepage
+    2. About page
+    3. Services page
+    4. Projects page
+
+    Test each page after updating to ensure images load correctly.
+  </Step>
+</Steps>
+
+## Testing your images
+
+After replacing images, verify:
+
+- [ ] All images load without broken links
+- [ ] Images display at correct sizes (not stretched or distorted)
+- [ ] File sizes are optimized (check with browser DevTools)
+- [ ] Alt text is descriptive and accurate
+- [ ] Images look good on both desktop and mobile
+- [ ] Page load time is acceptable (under 3 seconds)
+
+<Note>
+  Use browser DevTools (F12) → Network tab to check image load times and file sizes. Look for images larger than 300KB that might benefit from additional compression.
+</Note>
+
+## Common image issues
+
+### Images not displaying
+
+If images don't appear:
+
+1. **Check file path**: Ensure the path is correct and uses the right number of `../` for subdirectories
+2. **Verify file exists**: Confirm the image file is in the specified location
+3. **Check file extension**: Ensure the extension in the HTML matches the actual file (`.jpg` vs `.jpeg`)
+4. **Test in browser**: Open the image URL directly in your browser to see if it loads
+
+### Images stretched or distorted
+
+The CSS already handles responsive sizing with `max-width: 100%` in `assets/css/base.css:26-29`. If images appear stretched:
+
+1. Check the original image dimensions
+2. Ensure you're not setting explicit `width` and `height` attributes that distort the aspect ratio
+3. Use image editing software to crop to the appropriate aspect ratio before uploading
+
+### Slow page loading
+
+If pages load slowly after adding images:
+
+1. **Compress images further**: Aim for under 150KB per image
+2. **Use lazy loading**: Add `loading="lazy"` to image tags:
+   ```html
+   <img src="image.jpg" alt="Description" loading="lazy" />
+   ```
+3. **Consider WebP format**: Convert JPG images to WebP for better compression
+4. **Use a CDN**: Host images on a content delivery network for faster global delivery
+
+<Tip>
+  Run your website through [PageSpeed Insights](https://pagespeed.web.dev/) after replacing images to get performance recommendations and optimization suggestions.
+</Tip>

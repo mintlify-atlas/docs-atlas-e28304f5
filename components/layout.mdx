@@ -1,0 +1,197 @@
+---
+title: Layout components
+description: Header, footer, navigation, containers, and grid systems for structuring pages
+---
+
+## Header
+
+The site header provides sticky navigation with the BuildPro brand and navigation links.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="index.html">BuildPro Construction</a>
+        <nav class="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/services.html">Services</a>
+          <a href="pages/projects.html">Projects</a>
+          <a href="pages/contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .site-header {
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(17, 24, 39, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+The header features a white background with subtle shadow, sticky positioning that follows scroll, and a minimum height of 74px. The brand name uses bold typography in the primary blue color.
+
+## Navigation
+
+Navigation links are displayed as a horizontal flexbox with hover and active states.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/services.html">Services</a>
+      <a href="pages/projects.html">Projects</a>
+      <a href="pages/contact.html">Contact</a>
+    </nav>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #1f2937;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--secondary);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Links are spaced 1.2rem apart with semi-bold weight. On hover or when active, links change to the secondary orange color with a smooth transition.
+
+## Footer
+
+The site footer displays copyright information with dark background.
+
+<Tabs>
+  <Tab title="HTML">
+    ```html
+    <footer class="site-footer">
+      <div class="container">© 2026 BuildPro Construction. All rights reserved.</div>
+    </footer>
+    ```
+  </Tab>
+  <Tab title="CSS">
+    ```css
+    .site-footer {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 1.4rem 0;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+The footer uses a dark slate background (#0f172a) with light gray text, centered content, and spacing above.
+
+## Container
+
+The container centers content with responsive width constraints.
+
+```css
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+```
+
+Maximum width is 1120px on large screens, reducing to 92% of viewport width on smaller screens for proper margins.
+
+## Section
+
+Sections provide consistent vertical spacing between page segments.
+
+```css
+.section {
+  padding: 4.5rem 0;
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.3rem);
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+
+.section-subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+```
+
+Sections have 4.5rem top and bottom padding. Section titles use fluid typography that scales between 1.7rem and 2.3rem based on viewport width.
+
+## Grid systems
+
+BuildPro uses CSS Grid for flexible layouts.
+
+<CodeGroup>
+
+```css Two-column grid
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+```
+
+```css Three-column card grid
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+```
+
+```css Contact grid
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.2rem;
+}
+```
+
+</CodeGroup>
+
+**Grid-2** creates two equal-width columns with 2rem gap and vertically centered items. Used for image-text layouts.
+
+**Card-grid** displays three equal columns with 1.2rem spacing. Perfect for service cards and project showcases.
+
+**Contact-grid** uses asymmetric columns (1.15fr and 0.85fr) to give the form more space than the contact info sidebar.

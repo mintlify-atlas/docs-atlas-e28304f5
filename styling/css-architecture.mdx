@@ -1,0 +1,187 @@
+---
+title: CSS architecture
+description: Learn about BuildPro's modular CSS system and how the stylesheet files are organized
+---
+
+The BuildPro website uses a modular CSS architecture that separates styles into focused, maintainable files. This approach makes it easy to locate and modify specific styles without affecting unrelated components.
+
+## File structure
+
+The CSS is organized into six files, each with a specific purpose:
+
+```
+assets/css/
+├── main.css          # Entry point that imports all other files
+├── base.css          # CSS variables, resets, and base element styles
+├── layout.css        # Layout patterns (containers, grids, header, footer)
+├── components.css    # Reusable UI components (buttons, cards, forms)
+├── sections.css      # Page-specific sections (hero, gallery, services)
+└── responsive.css    # Media queries for mobile/tablet breakpoints
+```
+
+## Import order
+
+The `main.css` file serves as the entry point and imports all other stylesheets in a specific order:
+
+```css title="assets/css/main.css"
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./components.css");
+@import url("./sections.css");
+@import url("./responsive.css");
+```
+
+This order is important:
+1. **base.css** - Establishes CSS variables and resets first
+2. **layout.css** - Defines structural patterns that components will use
+3. **components.css** - Builds reusable components on top of layouts
+4. **sections.css** - Composes components into page sections
+5. **responsive.css** - Overrides styles for different screen sizes last
+
+<Note>
+  The cascade order matters. Responsive styles come last so they can override base styles at specific breakpoints.
+</Note>
+
+## base.css
+
+Contains CSS custom properties (variables), CSS resets, and default styling for HTML elements:
+
+```css title="assets/css/base.css"
+:root {
+  --primary: #1e3a8a;
+  --secondary: #f97316;
+  --bg: #f3f4f6;
+  --text: #111827;
+  --white: #ffffff;
+  --muted: #6b7280;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+```
+
+## layout.css
+
+Defines reusable layout patterns like containers, grids, header, and footer:
+
+```css title="assets/css/layout.css" {1-4,6-8}
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+```
+
+<Tip>
+  The `.container` class uses `min()` to create a responsive container that's fluid on small screens and fixed-width on large screens, without media queries.
+</Tip>
+
+## components.css
+
+Contains styles for reusable UI components like buttons, cards, and form elements:
+
+```css title="assets/css/components.css"
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+```
+
+## sections.css
+
+Defines styles specific to page sections like the hero banner, gallery, and service listings:
+
+```css title="assets/css/sections.css" {2-9}
+.hero {
+  min-height: 78vh;
+  display: grid;
+  align-items: center;
+  background:
+    linear-gradient(rgba(30, 58, 138, 0.65), rgba(17, 24, 39, 0.7)),
+    url("https://images.unsplash.com/.../photo-...") center/cover no-repeat;
+  color: #fff;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+```
+
+## responsive.css
+
+Contains all media queries for responsive design. See [Responsive design](/styling/responsive-design) for details.
+
+```css title="assets/css/responsive.css"
+@media (max-width: 980px) {
+  .grid-2,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid,
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+```
+
+## Benefits of this architecture
+
+- **Maintainability** - Easy to find and modify specific styles
+- **Scalability** - New components and sections can be added without conflicts
+- **Performance** - Browser caches individual files, only changed files need re-downloading
+- **Collaboration** - Multiple developers can work on different files simultaneously
+- **Debugging** - Browser DevTools show which file each style comes from
+
+<Note>
+  When adding new styles, always place them in the appropriate file based on their purpose. Don't add component styles to sections.css or vice versa.
+</Note>

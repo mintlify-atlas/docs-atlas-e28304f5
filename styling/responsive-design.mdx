@@ -1,0 +1,293 @@
+---
+title: Responsive design
+description: Learn how BuildPro implements mobile-first responsive design with breakpoints and fluid layouts
+---
+
+BuildPro uses a mobile-first responsive design approach, ensuring the website works seamlessly across all device sizes from smartphones to large desktop monitors.
+
+## Breakpoint system
+
+The website uses two primary breakpoints defined in `responsive.css`:
+
+| Breakpoint | Max width | Target devices |
+|------------|-----------|----------------|
+| **Tablet** | 980px | iPads, small laptops, portrait tablets |
+| **Mobile** | 640px | Phones, small tablets |
+
+```css title="assets/css/responsive.css"
+@media (max-width: 980px) {
+  /* Tablet styles */
+}
+
+@media (max-width: 640px) {
+  /* Mobile styles */
+}
+```
+
+<Note>
+  Media queries use `max-width`, meaning styles apply when the viewport is *at or below* the specified width. This follows a desktop-first override pattern.
+</Note>
+
+## Mobile-first philosophy
+
+While the media queries use `max-width` (desktop-first syntax), many base styles are designed with mobile devices in mind:
+
+- Fluid typography using `clamp()`
+- Flexible containers with percentage-based widths
+- Touch-friendly button sizes (minimum 44x44px)
+- Readable line lengths on narrow screens
+
+## Responsive layouts
+
+### Grid systems
+
+Grids automatically collapse on smaller screens:
+
+<Tabs>
+  <Tab title="Desktop (default)">
+    ```css title="assets/css/layout.css"
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Tablet (≤980px)">
+    ```css title="assets/css/responsive.css"
+    @media (max-width: 980px) {
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid,
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    ```
+    
+    Two-column grids become single column. Three-column grids become two columns.
+  </Tab>
+  
+  <Tab title="Mobile (≤640px)">
+    ```css title="assets/css/responsive.css"
+    @media (max-width: 640px) {
+      .card-grid,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+    ```
+    
+    All multi-column grids become single column for optimal mobile viewing.
+  </Tab>
+</Tabs>
+
+### Container behavior
+
+The `.container` class uses modern CSS to be responsive without media queries:
+
+```css title="assets/css/layout.css"
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+```
+
+- **Large screens**: Fixed at 1120px max width
+- **Small screens**: Fluid at 92% of viewport width
+- **All screens**: Centered with auto margins
+
+<Tip>
+  The `min()` function eliminates the need for a media query. It automatically chooses the smaller value, making the container responsive by default.
+</Tip>
+
+## Fluid typography
+
+Typography scales smoothly across screen sizes using `clamp()`:
+
+```css title="assets/css/layout.css"
+.section-title {
+  font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.3rem);
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+```
+
+```css title="assets/css/sections.css"
+.hero h1 {
+  font-size: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+  margin: 0 0 0.9rem;
+  line-height: 1.1;
+}
+```
+
+The `clamp()` function takes three values:
+1. **Minimum size** (mobile)
+2. **Preferred size** (scales with viewport)
+3. **Maximum size** (desktop)
+
+<Note>
+  Fluid typography improves readability by preventing text from becoming too large on wide screens or too small on narrow screens.
+</Note>
+
+## Component adaptations
+
+### Navigation
+
+The navigation adjusts for mobile devices:
+
+```css title="assets/css/responsive.css"
+@media (max-width: 640px) {
+  .nav {
+    padding: 0.8rem 0;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.65rem;
+  }
+}
+```
+
+This spreads navigation links across the full width on mobile, making them easier to tap.
+
+### Hero section
+
+The hero height adjusts for better mobile proportions:
+
+```css title="assets/css/responsive.css"
+@media (max-width: 640px) {
+  .hero {
+    min-height: 70vh;
+  }
+}
+```
+
+Reduces from 78vh (desktop) to 70vh (mobile) to prevent excessive scrolling on small screens.
+
+### Service cards
+
+Service card layouts reverse to default stacking order on tablets:
+
+```css title="assets/css/responsive.css"
+@media (max-width: 980px) {
+  .service-card:nth-child(even) .service-content,
+  .service-card:nth-child(even) .service-image {
+    order: initial;
+  }
+}
+```
+
+On desktop, even-numbered service cards have reversed layouts (image on left, content on right). This resets to default stacking on smaller screens.
+
+## Spacing adjustments
+
+Section padding reduces on mobile to conserve vertical space:
+
+<Tabs>
+  <Tab title="Desktop">
+    ```css title="assets/css/layout.css"
+    .section {
+      padding: 4.5rem 0;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Mobile">
+    ```css title="assets/css/responsive.css"
+    @media (max-width: 640px) {
+      .section {
+        padding: 3.2rem 0;
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Testing responsive design
+
+### Browser DevTools
+
+1. Open DevTools (F12 or Cmd+Opt+I)
+2. Click the device toolbar icon (Cmd+Shift+M)
+3. Select a preset device or enter custom dimensions
+4. Test at both breakpoints: 980px and 640px
+
+### Real devices
+
+Test on actual devices when possible:
+
+- **Mobile**: iPhone, Android phones (375px - 428px width)
+- **Tablet**: iPad, Android tablets (768px - 1024px width)
+- **Desktop**: Laptops and monitors (1280px+ width)
+
+<Tip>
+  Test at breakpoint boundaries (979px, 980px, 981px and 639px, 640px, 641px) to ensure smooth transitions between responsive states.
+</Tip>
+
+## Best practices
+
+### Touch targets
+
+Buttons and interactive elements meet minimum touch target sizes:
+
+```css title="assets/css/components.css"
+.btn {
+  padding: 0.8rem 1.2rem;  /* Creates ~44px minimum height */
+}
+```
+
+### Image optimization
+
+Images scale responsively and maintain aspect ratios:
+
+```css title="assets/css/base.css"
+img {
+  max-width: 100%;
+  display: block;
+}
+```
+
+### Viewport meta tag
+
+Ensure your HTML includes the viewport meta tag:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+This ensures proper scaling on mobile devices.
+
+## Adding custom breakpoints
+
+If you need additional breakpoints, add them to `responsive.css`:
+
+```css title="assets/css/responsive.css"
+/* Extra large screens */
+@media (min-width: 1400px) {
+  .container {
+    width: 1280px;
+  }
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
+  /* Custom tablet styles */
+}
+```
+
+<Note>
+  Add new breakpoints sparingly. Too many breakpoints increase complexity and maintenance burden. The current two-breakpoint system handles most use cases effectively.
+</Note>

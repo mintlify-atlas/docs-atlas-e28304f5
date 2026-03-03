@@ -1,0 +1,161 @@
+---
+title: Introduction
+description: Overview of the BuildPro Construction website project - a modern static HTML/CSS/JavaScript website for a construction company
+---
+
+## Welcome to BuildPro Construction
+
+BuildPro Construction is a professional, production-ready static website designed for construction companies. Built with clean, semantic HTML and modular CSS architecture, this project demonstrates best practices for modern web development without the complexity of frameworks.
+
+<Note>
+This is a fully static website - no build process, no dependencies, and no server-side code required. Just open and run.
+</Note>
+
+## What you'll build
+
+The BuildPro Construction website is a complete business website featuring:
+
+<CardGroup cols={2}>
+  <Card title="5 Responsive pages" icon="file">
+    Home, About, Services, Projects, and Contact pages with consistent design and navigation
+  </Card>
+  <Card title="Modular CSS architecture" icon="layer-group">
+    Organized stylesheet structure with base, layout, components, sections, and responsive modules
+  </Card>
+  <Card title="Interactive filtering" icon="filter">
+    Vanilla JavaScript project filter with category switching (All, Residential, Commercial)
+  </Card>
+  <Card title="Production-ready forms" icon="envelope">
+    Integrated contact forms with Formspree for instant lead capture
+  </Card>
+</CardGroup>
+
+## Project architecture
+
+The project follows a clean, intuitive folder structure:
+
+```
+build-pro-construction/
+├── index.html              # Homepage
+├── README.md               # Project documentation
+├── assets/
+│   ├── css/
+│   │   ├── base.css        # Variables, reset, typography
+│   │   ├── layout.css      # Header, nav, footer, grid
+│   │   ├── components.css  # Buttons, cards, reusable blocks
+│   │   ├── sections.css    # Hero, gallery, page-specific UI
+│   │   ├── responsive.css  # Breakpoints and mobile styles
+│   │   └── main.css        # Single import entrypoint
+│   └── js/
+│       └── projects-filter.js  # Filter logic for projects
+└── pages/
+    ├── about.html          # Company information
+    ├── services.html       # Service offerings
+    ├── projects.html       # Project showcase with filters
+    └── contact.html        # Contact form and information
+```
+
+## Key features
+
+### Modular CSS system
+
+The CSS is organized into focused modules that are imported through a single entrypoint:
+
+```css assets/css/main.css
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./components.css");
+@import url("./sections.css");
+@import url("./responsive.css");
+```
+
+This approach provides:
+- Clear separation of concerns
+- Easy maintenance and updates
+- Reusable component styles
+- Scalable architecture
+
+### CSS custom properties
+
+The design system uses CSS variables for consistent theming:
+
+```css assets/css/base.css
+:root {
+  --primary: #1e3a8a;
+  --secondary: #f97316;
+  --bg: #f3f4f6;
+  --text: #111827;
+  --white: #ffffff;
+  --muted: #6b7280;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+}
+```
+
+<Info>
+Change colors across the entire site by updating a single variable in `base.css`
+</Info>
+
+### Vanilla JavaScript filtering
+
+The projects page includes an interactive filter system built with vanilla JavaScript:
+
+```javascript assets/js/projects-filter.js
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-item");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedType = button.dataset.filter;
+
+      filterButtons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+
+      projectCards.forEach((card) => {
+        const type = card.dataset.type;
+        const shouldShow = selectedType === "all" || selectedType === type;
+        card.style.display = shouldShow ? "block" : "none";
+      });
+    });
+  });
+});
+```
+
+## Who this is for
+
+This project is perfect for:
+
+- **Construction companies** looking for a professional web presence
+- **Web developers** learning static site development and CSS architecture
+- **Freelancers** who need a customizable template for clients
+- **Students** studying front-end development best practices
+
+## Technology stack
+
+<CardGroup cols={3}>
+  <Card title="HTML5" icon="code">
+    Semantic, accessible markup
+  </Card>
+  <Card title="CSS3" icon="paintbrush">
+    Modular architecture with custom properties
+  </Card>
+  <Card title="JavaScript" icon="js">
+    Vanilla ES6+ for interactions
+  </Card>
+</CardGroup>
+
+<Info>
+No frameworks, no build tools, no npm packages - just clean, standard web technologies.
+</Info>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quick start" icon="rocket" href="/quickstart">
+    Get the site running locally in under 2 minutes
+  </Card>
+  <Card title="Deployment" icon="cloud-arrow-up" href="/deployment">
+    Deploy to production with Netlify, Vercel, or GitHub Pages
+  </Card>
+</CardGroup>
