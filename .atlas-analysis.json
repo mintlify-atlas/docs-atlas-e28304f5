@@ -1,0 +1,77 @@
+{
+  "projectType": "frontend",
+  "projectName": "BuildPro Construction",
+  "projectDescription": "Modern static website for a construction company with responsive design and modular CSS architecture",
+  "theme": "almond",
+  "primaryColor": "#1e3a8a",
+  "lightColor": "#f97316",
+  "darkColor": null,
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "introduction",
+          "quickstart",
+          "deployment"
+        ]
+      },
+      {
+        "group": "Project Structure",
+        "pages": [
+          "structure/overview",
+          "structure/pages",
+          "structure/assets"
+        ]
+      },
+      {
+        "group": "Styling",
+        "pages": [
+          "styling/css-architecture",
+          "styling/theme-customization",
+          "styling/responsive-design"
+        ]
+      },
+      {
+        "group": "Components",
+        "pages": [
+          "components/layout",
+          "components/cards",
+          "components/forms",
+          "components/buttons"
+        ]
+      },
+      {
+        "group": "Features",
+        "pages": [
+          "features/project-filter",
+          "features/contact-form",
+          "features/navigation"
+        ]
+      },
+      {
+        "group": "Customization",
+        "pages": [
+          "customization/branding",
+          "customization/content",
+          "customization/images"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Modular CSS architecture with separate base, layout, components, sections, and responsive stylesheets",
+    "Responsive design with mobile-first approach and breakpoints",
+    "Interactive project filtering by category (All, Residential, Commercial)",
+    "Contact form integration with Formspree",
+    "Semantic HTML structure with accessibility considerations",
+    "Customizable theme colors and branding through CSS variables"
+  ],
+  "publicApiSurface": [
+    "CSS Variables: --primary, --secondary, --bg, --text, --white, --muted, --radius, --shadow",
+    "Pages: index.html, about.html, services.html, projects.html, contact.html",
+    "CSS Modules: base.css, layout.css, components.css, sections.css, responsive.css, main.css",
+    "JavaScript: projects-filter.js (filter buttons and project cards management)",
+    "Components: .card, .btn, .hero, .gallery, .check-list, .nav-links, .service-card, .project-item"
+  ]
+}
